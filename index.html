@@ -12,14 +12,20 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 
-/* Hero Section Optimasi */
+/* Hero Section */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
-.hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
 
-/* Styling Logo dengan Dimensi Terkunci untuk Debugging */
-.brand-logo{width:180px;height:180px;margin-bottom:20px;object-fit:contain;
-filter:drop-shadow(0px 4px 10px rgba(0,0,0,0.5));}
+/* Optimasi Ukuran Logo Premium (Diperbesar) */
+.brand-logo{
+width: 100%;
+max-width: 280px; /* Ukuran diperbesar agar logo terlihat mewah & jelas di HP */
+height: auto;
+margin-bottom: 10px;
+object-fit: contain;
+filter: drop-shadow(0px 6px 15px rgba(0,0,0,0.6));
+}
 
 .hero h1{font-size:3rem;letter-spacing:3px;color:var(--gold);margin:0 0 10px 0}
 .hero h3{margin:0 0 15px 0;letter-spacing:1px}
@@ -47,7 +53,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 
 <section class="hero">
 <div class="hero-content">
-<img src="./logo.png" alt="Logo Mantul Kitchen" class="brand-logo" width="180" height="180">
+<img src="./logo.png" alt="Logo Mantul Kitchen" class="brand-logo">
 <h1>MANTUL KITCHEN</h1>
 <h3>Premium Frozen Food</h3>
 <p>"Kualitas Restoran Bintang Lima, Kini Hadir di Meja Makan Rumah Anda"</p>
