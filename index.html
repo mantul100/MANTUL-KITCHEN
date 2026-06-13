@@ -17,8 +17,8 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-seri
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
 .hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center}
 
-/* Styling Logo */
-.brand-logo{max-width:180px;height:auto;margin-bottom:20px;object-fit:contain;
+/* Styling Logo dengan Dimensi Terkunci untuk Debugging */
+.brand-logo{width:180px;height:180px;margin-bottom:20px;object-fit:contain;
 filter:drop-shadow(0px 4px 10px rgba(0,0,0,0.5));}
 
 .hero h1{font-size:3rem;letter-spacing:3px;color:var(--gold);margin:0 0 10px 0}
@@ -47,7 +47,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 
 <section class="hero">
 <div class="hero-content">
-<img src="logo.png" alt="Logo Mantul Kitchen" class="brand-logo">
+<img src="./logo.png" alt="Logo Mantul Kitchen" class="brand-logo" width="180" height="180">
 <h1>MANTUL KITCHEN</h1>
 <h3>Premium Frozen Food</h3>
 <p>"Kualitas Restoran Bintang Lima, Kini Hadir di Meja Makan Rumah Anda"</p>
