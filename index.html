@@ -17,14 +17,14 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-seri
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
 .hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
 
-/* Optimasi Ukuran Logo Premium (Diperbesar) */
+/* Optimasi Ukuran Logo Premium (Diperbesar ke 450px) */
 .brand-logo{
 width: 100%;
-max-width: 420px; /* Ukuran diperbesar agar logo terlihat mewah & jelas di HP */
+max-width: 450px; /* Ukuran diperbesar sesuai permintaan agar terlihat megah */
 height: auto;
-margin-bottom: 10px;
+margin-bottom: 15px;
 object-fit: contain;
-filter: drop-shadow(0px 6px 15px rgba(0,0,0,0.6));
+filter: drop-shadow(0px 8px 20px rgba(0,0,0,0.7));
 }
 
 .hero h1{font-size:3rem;letter-spacing:3px;color:var(--gold);margin:0 0 10px 0}
@@ -35,9 +35,16 @@ filter: drop-shadow(0px 6px 15px rgba(0,0,0,0.6));
 
 .container{max-width:1100px;margin:auto;padding:20px}
 .section-title{text-align:center;color:var(--gold);margin:40px 0;font-size:2rem;letter-spacing:1px}
-.card{background:var(--card);border-radius:24px;overflow:hidden;margin:24px 0;box-shadow:0 10px 30px rgba(0,0,0,.3);
-opacity:0;transform:translateY(40px);transition:all .7s ease}
-.card.show{opacity:1;transform:none}
+
+/* Efek Base untuk Animasi Scroll Reveal */
+.scroll-reveal{
+opacity:0;
+transform:translateY(50px);
+transition:opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.scroll-reveal.show{opacity:1;transform:translateY(0)}
+
+.card{background:var(--card);border-radius:24px;overflow:hidden;margin:24px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .card img{width:100%;height:320px;object-fit:cover}
 .content{padding:20px}
 .badge{display:inline-block;background:var(--gold);color:#111;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:bold;margin-bottom:10px}
@@ -64,7 +71,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="container">
 <h2 id="menu" class="section-title">DAFTAR MENU PREMIUM</h2>
 
-<div class="card">
+<div class="card scroll-reveal">
 <img src="01_Dimsum_Premium.png" alt="Dimsum">
 <div class="content">
 <span class="badge">🔥 BEST SELLER</span>
@@ -73,7 +80,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp17.500<br>10 pcs Rp33.000<br>20 pcs Rp65.000</div>
 </div></div>
 
-<div class="card">
+<div class="card scroll-reveal">
 <img src="02_Gyoza_Premium.png" alt="Gyoza">
 <div class="content">
 <span class="badge">🥟 JAPANESE STYLE</span>
@@ -82,7 +89,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp17.500<br>10 pcs Rp33.000<br>20 pcs Rp65.000</div>
 </div></div>
 
-<div class="card">
+<div class="card scroll-reveal">
 <img src="03_Wonton_Udang_Premium.png" alt="Wonton">
 <div class="content">
 <span class="badge">🍤 HIGHLY RECOMMENDED</span>
@@ -91,7 +98,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
 </div></div>
 
-<div class="card">
+<div class="card scroll-reveal">
 <img src="04_Lumpia_Kulit_Tahu_Premium.png" alt="Lumpia">
 <div class="content">
 <span class="badge">🥢 PREMIUM LINE</span>
@@ -100,16 +107,16 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
 </div></div>
 
-<div class="card">
+<div class="card scroll-reveal">
 <img src="05_Ceker_Saus_Lada_Premium.png" alt="Ceker">
 <div class="content">
 <span class="badge">🌟 FAVORIT PELANGGAN</span>
-<h2>STEAM CEKER SAOS LADA HITAM</h2>
+<h2>STEAM CEKER LADA HITAM PREMIUM</h2>
 <p>Ceker ayam pilihan yang dimasak hingga super empuk dengan bumbu spesial yang meresap sempurna.</p>
 <div class="price">1 porsi Rp15.000</div>
 </div></div>
 
-<div class="features">
+<div class="features scroll-reveal">
 <h2>Kenapa Pilih Kami?</h2>
 <ul>
 <li>Dominan Daging</li>
@@ -120,13 +127,13 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 </ul>
 </div>
 
-<div class="reseller">
+<div class="reseller scroll-reveal">
 <h2>🤝 Program Reseller</h2>
 <p>Dapatkan harga khusus reseller dan peluang keuntungan menarik.</p>
 <p><strong>WhatsApp: +62 896-0331-6269</strong></p>
 </div>
 
-<div class="footer">
+<div class="footer scroll-reveal">
 <h2>🛒 Pesan Sekarang</h2>
 <p>WhatsApp: +62 896-0331-6269</p>
 </div>
@@ -135,11 +142,20 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <a class="wa-float" href="https://wa.me/6289603316269" target="_blank">WhatsApp</a>
 
 <script>
-const cards=document.querySelectorAll('.card');
-const io=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
-},{threshold:.15});
-cards.forEach(c=>io.observe(c));
+// Menerapkan animasi scroll lancar (Scroll Reveal) ke semua elemen pilihan
+const revealElements = document.querySelectorAll('.scroll-reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, {
+  threshold: 0.1, // Elemen mulai muncul ketika 10% bagiannya masuk layar
+  rootMargin: "0px 0px -50px 0px" // Memberikan efek kemunculan yang lebih natural sebelum menyentuh batas bawah
+});
+
+revealElements.forEach(element => observer.observe(element));
 </script>
 
 </body>
