@@ -10,41 +10,57 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;overflow-x:hidden}
 
 /* Hero Section */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
 .hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
 
-/* Optimasi Ukuran Logo Premium (Diperbesar ke 450px) */
+/* Ukuran Logo Premium Diperbesar ke 450px + Animasi Intro */
 .brand-logo{
 width: 100%;
-max-width: 450px; /* Ukuran diperbesar sesuai permintaan agar terlihat megah */
+max-width: 450px; 
 height: auto;
 margin-bottom: 15px;
 object-fit: contain;
 filter: drop-shadow(0px 8px 20px rgba(0,0,0,0.7));
+animation: logoIntro 1.2s ease-out forwards;
+}
+
+@keyframes logoIntro {
+  from { opacity: 0; transform: scale(0.8) translateY(-20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .hero h1{font-size:3rem;letter-spacing:3px;color:var(--gold);margin:0 0 10px 0}
 .hero h3{margin:0 0 15px 0;letter-spacing:1px}
 .hero p{max-width:700px;color:var(--muted);margin-bottom:25px;font-style:italic}
-.btn{display:inline-block;padding:14px 24px;background:var(--gold);color:#111;text-decoration:none;border-radius:999px;font-weight:bold;transition:transform 0.2s}
-.btn:hover{transform:scale(1.05)}
+
+/* Tombol Utama (Lihat Menu + Putar Musik) */
+.btn{display:inline-block;padding:14px 28px;background:var(--gold);color:#111;text-decoration:none;border-radius:999px;font-weight:bold;font-size:1.1rem;cursor:pointer;border:none;transition:all 0.3s ease}
+.btn:hover{transform:scale(1.05);box-shadow: 0 0 20px rgba(212,175,55,0.5);}
 
 .container{max-width:1100px;margin:auto;padding:20px}
 .section-title{text-align:center;color:var(--gold);margin:40px 0;font-size:2rem;letter-spacing:1px}
 
-/* Efek Base untuk Animasi Scroll Reveal */
-.scroll-reveal{
-opacity:0;
-transform:translateY(50px);
-transition:opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.scroll-reveal.show{opacity:1;transform:translateY(0)}
+/* --- VARIASI ANIMASI SCROLL PREMIUM (ANTI-BOSAN) --- */
+.reveal { opacity: 0; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
 
-.card{background:var(--card);border-radius:24px;overflow:hidden;margin:24px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+/* 1. Efek Muncul Membesar (Scale) */
+.reveal-scale { transform: scale(0.9); }
+.reveal-scale.show { opacity: 1; transform: scale(1); }
+
+/* 2. Efek Meluncur dari Kiri (Slide Left) */
+.reveal-left { transform: translateX(-80px); }
+.reveal-left.show { opacity: 1; transform: translateX(0); }
+
+/* 3. Efek Meluncur dari Kanan (Slide Right) */
+.reveal-right { transform: translateX(80px); }
+.reveal-right.show { opacity: 1; transform: translateX(0); }
+
+/* Styling Komponen */
+.card{background:var(--card);border-radius:24px;overflow:hidden;margin:34px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .card img{width:100%;height:320px;object-fit:cover}
 .content{padding:20px}
 .badge{display:inline-block;background:var(--gold);color:#111;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:bold;margin-bottom:10px}
@@ -52,11 +68,58 @@ transition:opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezi
 .features,.reseller,.footer{background:var(--card);border-radius:24px;padding:24px;margin:24px 0}
 .features ul{line-height:2}
 .features h2, .reseller h2, .footer h2{color:var(--gold);margin-top:0}
+
+/* Tombol WhatsApp (Kanan Bawah) */
 .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
-padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition: transform 0.2s;}
+.wa-float:hover{transform: scale(1.05);}
+
+/* Tombol Kontrol Audio Mute/Unmute Minimalis (Kiri Bawah) */
+.music-control {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background: rgba(23, 23, 25, 0.85);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  font-size: 1rem;
+  opacity: 0; /* Tersembunyi di awal, muncul setelah tombol Utama ditekan */
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  backdrop-filter: blur(5px);
+}
+.music-control.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.music-control.playing {
+  background: var(--gold);
+  color: #111;
+  animation: pulseGlow 2s infinite;
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
+  100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+}
 </style>
 </head>
 <body>
+
+<audio id="bgMusic" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicBtn" class="music-control" onclick="toggleMusic()">🎵</div>
 
 <section class="hero">
 <div class="hero-content">
@@ -64,14 +127,14 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <h1>MANTUL KITCHEN</h1>
 <h3>Premium Frozen Food</h3>
 <p>"Kualitas Restoran Bintang Lima, Kini Hadir di Meja Makan Rumah Anda"</p>
-<a href="#menu" class="btn">Lihat Menu</a>
+<button onclick="lihatMenuDanPutarMusik()" class="btn">Lihat Menu 🍲</button>
 </div>
 </section>
 
 <div class="container">
-<h2 id="menu" class="section-title">DAFTAR MENU PREMIUM</h2>
+<h2 id="menu" class="section-title reveal reveal-scale">DAFTAR MENU PREMIUM</h2>
 
-<div class="card scroll-reveal">
+<div class="card reveal reveal-left">
 <img src="01_Dimsum_Premium.png" alt="Dimsum">
 <div class="content">
 <span class="badge">🔥 BEST SELLER</span>
@@ -80,7 +143,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp17.500<br>10 pcs Rp33.000<br>20 pcs Rp65.000</div>
 </div></div>
 
-<div class="card scroll-reveal">
+<div class="card reveal reveal-right">
 <img src="02_Gyoza_Premium.png" alt="Gyoza">
 <div class="content">
 <span class="badge">🥟 JAPANESE STYLE</span>
@@ -89,7 +152,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp17.500<br>10 pcs Rp33.000<br>20 pcs Rp65.000</div>
 </div></div>
 
-<div class="card scroll-reveal">
+<div class="card reveal reveal-left">
 <img src="03_Wonton_Udang_Premium.png" alt="Wonton">
 <div class="content">
 <span class="badge">🍤 HIGHLY RECOMMENDED</span>
@@ -98,7 +161,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
 </div></div>
 
-<div class="card scroll-reveal">
+<div class="card reveal reveal-right">
 <img src="04_Lumpia_Kulit_Tahu_Premium.png" alt="Lumpia">
 <div class="content">
 <span class="badge">🥢 PREMIUM LINE</span>
@@ -107,7 +170,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
 </div></div>
 
-<div class="card scroll-reveal">
+<div class="card reveal reveal-scale">
 <img src="05_Ceker_Saus_Lada_Premium.png" alt="Ceker">
 <div class="content">
 <span class="badge">🌟 FAVORIT PELANGGAN</span>
@@ -116,7 +179,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">1 porsi Rp15.000</div>
 </div></div>
 
-<div class="features scroll-reveal">
+<div class="features reveal reveal-scale">
 <h2>Kenapa Pilih Kami?</h2>
 <ul>
 <li>Dominan Daging</li>
@@ -127,13 +190,13 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 </ul>
 </div>
 
-<div class="reseller scroll-reveal">
+<div class="reseller reveal reveal-scale">
 <h2>🤝 Program Reseller</h2>
 <p>Dapatkan harga khusus reseller dan peluang keuntungan menarik.</p>
 <p><strong>WhatsApp: +62 896-0331-6269</strong></p>
 </div>
 
-<div class="footer scroll-reveal">
+<div class="footer reveal reveal-scale">
 <h2>🛒 Pesan Sekarang</h2>
 <p>WhatsApp: +62 896-0331-6269</p>
 </div>
@@ -142,8 +205,8 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <a class="wa-float" href="https://wa.me/6289603316269" target="_blank">WhatsApp</a>
 
 <script>
-// Menerapkan animasi scroll lancar (Scroll Reveal) ke semua elemen pilihan
-const revealElements = document.querySelectorAll('.scroll-reveal');
+// --- ANIMASI SCROLL INTERSECTION OBSERVER ---
+const revealElements = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -151,11 +214,42 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, {
-  threshold: 0.1, // Elemen mulai muncul ketika 10% bagiannya masuk layar
-  rootMargin: "0px 0px -50px 0px" // Memberikan efek kemunculan yang lebih natural sebelum menyentuh batas bawah
+  threshold: 0.15,
+  rootMargin: "0px 0px -40px 0px"
 });
+revealElements.forEach(el => observer.observe(el));
 
-revealElements.forEach(element => observer.observe(element));
+// --- LOGIKA UTAMA MUSIK & TOMBOL GABUNG ---
+const audio = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+function lihatMenuDanPutarMusik() {
+  // 1. Putar Musik Instan (Lolos dari pemblokiran otomatis browser)
+  if (audio.paused) {
+    audio.play().catch(e => console.log("Gagal memutar audio:", e));
+    musicBtn.innerHTML = "🔊";
+    musicBtn.classList.add('playing');
+  }
+  
+  // 2. Memunculkan tombol kontrol kecil di pojok kiri bawah secara elegan
+  musicBtn.classList.add('visible');
+  
+  // 3. Menggulirkan layar ke section daftar menu secara smooth
+  document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Fungsi pengontrol Mute / Unmute manual lewat tombol bulat kecil
+function toggleMusic() {
+  if (audio.paused) {
+    audio.play();
+    musicBtn.innerHTML = "🔊";
+    musicBtn.classList.add('playing');
+  } else {
+    audio.pause();
+    musicBtn.innerHTML = "🎵";
+    musicBtn.classList.remove('playing');
+  }
+}
 </script>
 
 </body>
