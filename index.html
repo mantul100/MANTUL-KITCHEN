@@ -69,6 +69,39 @@ animation: logoIntro 1.2s ease-out forwards;
 .features ul{line-height:2}
 .features h2, .reseller h2, .footer h2{color:var(--gold);margin-top:0}
 
+/* LAYOUT GRID KHUSUS BAKPAO (2 GAMBAR LANGSUNG TERLIHAT TANPA EFFORT GESER) */
+.bakpao-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 24px 24px 0 24px;
+}
+.bakpao-dual-grid img {
+  width: 100%;
+  height: 380px;
+  border-radius: 16px;
+  border: 1px solid #2a2a2e;
+}
+.bakpao-img-zoom {
+  object-fit: cover; /* Biar foto fokus bakpao zoom-in penuh padat estetik */
+}
+.bakpao-img-catalog {
+  object-fit: contain; /* Penting! Supaya seluruh teks katalog list karakter utuh & terbaca jelas tanpa terpotong */
+  background: #1c1c1e; /* Frame gelap elegan untuk menyangga sisi gambar katalog */
+}
+
+@media (max-width: 768px) {
+  .bakpao-dual-grid {
+    grid-template-columns: 1fr; /* Otomatis susun vertikal atas-bawah saat dibuka di HP */
+    gap: 12px;
+    padding: 16px 16px 0 16px;
+  }
+  .bakpao-dual-grid img {
+    height: auto;
+    max-height: 420px;
+  }
+}
+
 /* Tombol WhatsApp (Kanan Bawah) */
 .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
 padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition: transform 0.2s;}
@@ -92,7 +125,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
   z-index: 99;
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
   font-size: 1rem;
-  opacity: 0; /* Tersembunyi di awal, muncul setelah tombol Utama ditekan */
+  opacity: 0; 
   transform: translateY(20px);
   transition: all 0.5s ease;
   backdrop-filter: blur(5px);
@@ -179,14 +212,19 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">1 porsi Rp15.000</div>
 </div></div>
 
-<!-- MENU BARU: BAKPAO KARAKTER BABY ANIMAL -->
+<!-- KARTU MENU BAKPAO 2 SLIDE LANGSUNG TERLIHAT (TANPA GESER) -->
 <div class="card reveal reveal-scale">
-<img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter Baby Animal">
+<div class="bakpao-dual-grid">
+  <!-- Slide Gambar 1: Zoom In Produk Menarik -->
+  <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter Baby Animal" class="bakpao-img-zoom">
+  <!-- Slide Gambar 2: Gambar Katalog Lengkap (IMG-20260627-WA0017.jpg) -->
+  <img src="06_Bakpao_Katalog_List.png" alt="Katalog List Ragam Karakter Bakpao" class="bakpao-img-catalog">
+</div>
 <div class="content">
-<span class="badge">🧸 KIDS FAVORITE</span>
-<h2>BAKPAO KARAKTER BABY ANIMAL</h2>
-<p>Bakpao premium bertekstur super lembut dengan desain karakter hewan yang lucu dan menggemaskan. Seratus persen halal, sehat tanpa bahan pengawet, dengan isian yang lezat.</p>
-<div class="price">1 pack (isi 6) Rp25.000</div>
+<span class="badge">🧸 KIDS & FAMILY FAVORITE</span>
+<h2>BAKPAO KARAKTER PREMIUM</h2>
+<p>Bakpao premium bertekstur super lembut dengan bentuk karakter yang sangat menggemaskan. Seratus persen halal, higienis, sehat tanpa bahan pengawet, dengan varian isian rasa manis yang sangat disukai anak-anak maupun keluarga. Tersedia puluhan pilihan karakter unik siap dipesan!</p>
+<div class="price">1 pack (isi 6) Rp35.000</div>
 </div></div>
 
 <div class="features reveal reveal-scale">
@@ -234,21 +272,15 @@ const audio = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 
 function lihatMenuDanPutarMusik() {
-  // 1. Putar Musik Instan (Lolos dari pemblokiran otomatis browser)
   if (audio.paused) {
     audio.play().catch(e => console.log("Gagal memutar audio:", e));
     musicBtn.innerHTML = "🔊";
     musicBtn.classList.add('playing');
   }
-  
-  // 2. Memunculkan tombol kontrol kecil di pojok kiri bawah secara elegan
   musicBtn.classList.add('visible');
-  
-  // 3. Menggulirkan layar ke section daftar menu secara smooth
   document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Fungsi pengontrol Mute / Unmute manual lewat tombol bulat kecil
 function toggleMusic() {
   if (audio.paused) {
     audio.play();
