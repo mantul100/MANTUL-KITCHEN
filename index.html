@@ -7,6 +7,7 @@
 <style>
 :root{
 --bg:#0b0b0c;--card:#171719;--gold:#d4af37;--text:#f5f5f5;--muted:#bdbdbd;--accent:#7a0e0e;
+--success:#25D366;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -69,7 +70,7 @@ animation: logoIntro 1.2s ease-out forwards;
 .features ul{line-height:2}
 .features h2, .reseller h2, .footer h2{color:var(--gold);margin-top:0}
 
-/* LAYOUT GRID KHUSUS BAKPAO (2 GAMBAR LANGSUNG TERLIHAT TANPA EFFORT GESER) */
+/* LAYOUT GRID KHUSUS BAKPAO */
 .bakpao-dual-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -82,25 +83,66 @@ animation: logoIntro 1.2s ease-out forwards;
   border-radius: 16px;
   border: 1px solid #2a2a2e;
 }
-.bakpao-img-zoom {
-  object-fit: cover; /* Biar foto fokus bakpao zoom-in penuh padat estetik */
-}
-.bakpao-img-catalog {
-  object-fit: contain; /* Penting! Supaya seluruh teks katalog list karakter utuh & terbaca jelas tanpa terpotong */
-  background: #1c1c1e; /* Frame gelap elegan untuk menyangga sisi gambar katalog */
-}
+.bakpao-img-zoom { object-fit: cover; }
+.bakpao-img-catalog { object-fit: contain; background: #1c1c1e; }
 
 @media (max-width: 768px) {
-  .bakpao-dual-grid {
-    grid-template-columns: 1fr; /* Otomatis susun vertikal atas-bawah saat dibuka di HP */
-    gap: 12px;
-    padding: 16px 16px 0 16px;
-  }
-  .bakpao-dual-grid img {
-    height: auto;
-    max-height: 420px;
-  }
+  .bakpao-dual-grid { grid-template-columns: 1fr; gap: 12px; padding: 16px 16px 0 16px; }
+  .bakpao-dual-grid img { height: auto; max-height: 420px; }
 }
+
+/* --- STYLING AREA FEEDBACK & REVIEWS BARU --- */
+.review-section {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 30px;
+  margin: 40px 0;
+  border: 1px solid #2a2a2e;
+}
+.review-section h2 { color: var(--gold); margin-top: 0; font-size: 1.8rem; text-align: center; }
+.reviews-container {
+  max-height: 350px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  padding-right: 10px;
+}
+/* Kustom Scrollbar untuk List Review */
+.reviews-container::-webkit-scrollbar { width: 6px; }
+.reviews-container::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+.review-item {
+  background: rgba(255,255,255,0.03);
+  border-left: 4px solid var(--gold);
+  padding: 15px;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 15px;
+}
+.review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.reviewer-name { font-weight: bold; color: var(--text); }
+.review-stars { color: var(--gold); letter-spacing: 2px; }
+.review-text { color: var(--muted); font-size: 0.95rem; margin: 0; font-style: italic; }
+
+/* Form Input Review */
+.review-form {
+  border-top: 1px dashed #3a3a3e;
+  padding-top: 20px;
+}
+.review-form h4 { margin: 0 0 15px 0; color: var(--text); font-size: 1.1rem; }
+.form-group { margin-bottom: 15px; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 12px; background: #202023; border: 1px solid #3a3a3e;
+  border-radius: 10px; color: var(--text); font-size: 1rem;
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+.star-rating-input {
+  display: flex; gap: 8px; font-size: 1.5rem; color: #444; margin-bottom: 15px; cursor: pointer;
+}
+.star-rating-input span:hover, .star-rating-input span.active { color: var(--gold); }
+.btn-submit {
+  width: 100%; padding: 12px; background: transparent; border: 2px solid var(--gold);
+  color: var(--gold); font-weight: bold; border-radius: 10px; cursor: pointer; transition: all 0.3s;
+}
+.btn-submit:hover { background: var(--gold); color: #111; }
 
 /* Tombol WhatsApp (Kanan Bawah) */
 .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
@@ -109,36 +151,14 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 
 /* Tombol Kontrol Audio Mute/Unmute Minimalis (Kiri Bawah) */
 .music-control {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  background: rgba(23, 23, 25, 0.85);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 99;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  font-size: 1rem;
-  opacity: 0; 
-  transform: translateY(20px);
-  transition: all 0.5s ease;
-  backdrop-filter: blur(5px);
+  position: fixed; left: 20px; bottom: 20px; background: rgba(23, 23, 25, 0.85);
+  border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  font-size: 1rem; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; backdrop-filter: blur(5px);
 }
-.music-control.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.music-control.playing {
-  background: var(--gold);
-  color: #111;
-  animation: pulseGlow 2s infinite;
-}
+.music-control.visible { opacity: 1; transform: translateY(0); }
+.music-control.playing { background: var(--gold); color: #111; animation: pulseGlow 2s infinite; }
 @keyframes pulseGlow {
   0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
   70% { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
@@ -212,23 +232,54 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">1 porsi Rp15.000</div>
 </div></div>
 
-<!-- KARTU MENU BAKPAO 2 SLIDE LANGSUNG TERLIHAT (TANPA GESER) -->
+<!-- KARTU MENU BAKPAO 2 SLIDE LANGSUNG TERLIHAT -->
 <div class="card reveal reveal-scale">
 <div class="bakpao-dual-grid">
-  <!-- Slide Gambar 1: Zoom In Produk Menarik -->
   <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter Baby Animal" class="bakpao-img-zoom">
-  <!-- Slide Gambar 2: Gambar Katalog Lengkap (IMG-20260627-WA0017.jpg) -->
   <img src="06_Bakpao_Katalog_List.png" alt="Katalog List Ragam Karakter Bakpao" class="bakpao-img-catalog">
 </div>
 <div class="content">
 <span class="badge">🧸 KIDS & FAMILY FAVORITE</span>
 <h2>BAKPAO KARAKTER PREMIUM</h2>
-<p>Bakpao premium bertekstur super lembut dengan bentuk karakter yang sangat menggemaskan. Seratus persen halal, higienis, sehat tanpa bahan pengawet, dengan varian isian rasa manis yang sangat disukai anak-anak maupun keluarga. Tersedia puluhan pilihan karakter unik siap dipesan!</p>
-<div class="price">1 pack (isi 6) Rp25.000</div>
+<p>Bakpao premium bertekstur super lembut dengan bentuk karakter yang sangat menggemaskan. Seratus persen halal, higienis, sehat tanpa bahan pengawet, dengan varian isian rasa manis yang sangat disukai anak-anak maupun keluarga.</p>
+<div class="price">1 pack (isi 6) Rp35.000</div>
 </div></div>
 
+<!-- ================= KOLOM FEEDBACK & REVIEW INTERAKTIF ================= -->
+<div class="review-section reveal reveal-scale">
+  <h2>💬 TESTIMONI & FEEDBACK</h2>
+  
+  <!-- Tempat List Ulasan Muncul -->
+  <div class="reviews-container" id="reviewsContainer">
+    <!-- Ulasan Bawaan Otomatis Ter-inject lewat JS -->
+  </div>
+
+  <!-- Form Kirim Ulasan -->
+  <div class="review-form">
+    <h4>Yuk, Tulis Ulasan Jujur Anda:</h4>
+    <div class="form-group">
+      <input type="text" id="reviewerName" placeholder="Nama Anda (Contoh: Siska Amelia)" required>
+    </div>
+    
+    <label style="display:block; margin-bottom: 8px; font-size: 0.9rem; color: var(--muted);">Berikan Rating Bintang:</label>
+    <div class="star-rating-input" id="starRatingInput">
+      <span data-value="1" onclick="setRating(1)">★</span>
+      <span data-value="2" onclick="setRating(2)">★</span>
+      <span data-value="3" onclick="setRating(3)">★</span>
+      <span data-value="4" onclick="setRating(4)">★</span>
+      <span data-value="5" class="active" onclick="setRating(5)">★</span>
+    </div>
+
+    <div class="form-group">
+      <textarea id="reviewContent" rows="3" placeholder="Bagikan pengalaman kelezatan menu Mantul Kitchen..." required></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitReview()">Kirim Ulasan Terbaik 🌟</button>
+  </div>
+</div>
+<!-- ===================================================================== -->
+
 <div class="features reveal reveal-scale">
-<h2>Kenapa Pilih Kami?</h2>
+<h2>Keninyamanan & Keunggulan Kami:</h2>
 <ul>
 <li>Dominan Daging</li>
 <li>Minim Tepung</li>
@@ -267,7 +318,7 @@ const observer = new IntersectionObserver(entries => {
 });
 revealElements.forEach(el => observer.observe(el));
 
-// --- LOGIKA UTAMA MUSIK & TOMBOL GABUNG ---
+// --- LOGIKA AUDIO ---
 const audio = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 
@@ -292,6 +343,85 @@ function toggleMusic() {
     musicBtn.classList.remove('playing');
   }
 }
+
+// --- LOGIKA ENGINE REVIEW & FEEDBACK MANTUL KITCHEN ---
+let selectedRating = 5;
+
+// Ulasan Master (Default bawaan untuk pancingan komersial)
+const defaultReviews = [
+  { name: "Bunda Keysha", stars: 5, text: "Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha." },
+  { name: "Hendra Wijaya", stars: 5, text: "Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt sama rasanya mas." },
+  { name: "Riana", stars: 4, text: "Ceker lada hitamnya empuk banget bumbunya nendang abis. Pas buat stock kulkas mager masak tinggal kukus beres." }
+];
+
+function loadReviews() {
+  const container = document.getElementById('reviewsContainer');
+  // Ambil ulasan buatan user dari localStorage
+  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews')) || [];
+  
+  // Gabungkan ulasan bawaan tetap dengan ulasan user
+  let allReviews = [...defaultReviews, ...userReviews];
+  
+  container.innerHTML = "";
+  allReviews.forEach(rev => {
+    let starsStr = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
+    container.innerHTML += `
+      <div class="review-item">
+        <div class="review-header">
+          <span class="reviewer-name">${rev.name}</span>
+          <span class="review-stars">${starsStr}</span>
+        </div>
+        <p class="review-text">"${rev.text}"</p>
+      </div>
+    `;
+  });
+}
+
+function setRating(val) {
+  selectedRating = val;
+  const stars = document.querySelectorAll('#starRatingInput span');
+  stars.forEach(star => {
+    if(parseInt(star.getAttribute('data-value')) <= val) {
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
+  });
+}
+
+function submitReview() {
+  const nameInput = document.getElementById('reviewerName');
+  const textInput = document.getElementById('reviewContent');
+  
+  if(!nameInput.value.trim() || !textInput.value.trim()) {
+    alert("Harap isi Nama dan Pesan Ulasan Anda terlebih dahulu, ya!");
+    return;
+  }
+  
+  let newReview = {
+    name: nameInput.value.trim(),
+    stars: selectedRating,
+    text: textInput.value.trim()
+  };
+  
+  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews')) || [];
+  userReviews.unshift(newReview); // Ulasan baru ditaruh di paling atas list user
+  localStorage.setItem('mantul_reviews', JSON.stringify(userReviews));
+  
+  // Bersihkan form
+  nameInput.value = "";
+  textInput.value = "";
+  setRating(5);
+  
+  // Muat ulang
+  loadReviews();
+  alert("Terima kasih banyak atas feedback luar biasa Anda untuk Mantul Kitchen! ❤️");
+}
+
+// Jalankan otomatis saat halaman dibuka
+window.onload = function() {
+  loadReviews();
+};
 </script>
 
 </body>
