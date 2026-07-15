@@ -18,6 +18,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-seri
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
 .hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
 
+/* Ukuran Logo Premium Diperbesar ke 450px + Animasi Intro */
 .brand-logo{
 width: 100%;
 max-width: 450px; 
@@ -37,13 +38,14 @@ animation: logoIntro 1.2s ease-out forwards;
 .hero h3{margin:0 0 15px 0;letter-spacing:1px}
 .hero p{max-width:700px;color:var(--muted);margin-bottom:25px;font-style:italic}
 
+/* Tombol Utama (Lihat Menu + Putar Musik) */
 .btn{display:inline-block;padding:14px 28px;background:var(--gold);color:#111;text-decoration:none;border-radius:999px;font-weight:bold;font-size:1.1rem;cursor:pointer;border:none;transition:all 0.3s ease}
 .btn:hover{transform:scale(1.05);box-shadow: 0 0 20px rgba(212,175,55,0.5);}
 
 .container{max-width:1100px;margin:auto;padding:20px}
 .section-title{text-align:center;color:var(--gold);margin:40px 0;font-size:2rem;letter-spacing:1px}
 
-/* --- VARIATION SCROLL ANIMATION --- */
+/* --- VARIASI ANIMASI SCROLL PREMIUM --- */
 .reveal { opacity: 0; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
 .reveal-scale { transform: scale(0.9); }
 .reveal-scale.show { opacity: 1; transform: scale(1); }
@@ -62,7 +64,7 @@ animation: logoIntro 1.2s ease-out forwards;
 .features ul{line-height:2}
 .features h2, .reseller h2, .footer h2{color:var(--gold);margin-top:0}
 
-/* LAYOUT GRID KHUSUS BAKPAO */
+/* LAYOUT GRID KHUSUS BAKPAO (2 Slide Berdampingan) */
 .bakpao-dual-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -101,7 +103,6 @@ animation: logoIntro 1.2s ease-out forwards;
 .review-stars { color: var(--gold); letter-spacing: 2px; }
 .review-text { color: var(--muted); font-size: 0.95rem; margin: 0 0 10px 0; font-style: italic; }
 
-/* Thumbnail Foto Review dari Pembeli */
 .review-attached-img {
   display: block; max-width: 140px; height: 140px; object-fit: cover;
   border-radius: 8px; border: 1px solid #3a3a3e; margin-top: 8px;
@@ -119,7 +120,6 @@ animation: logoIntro 1.2s ease-out forwards;
 }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
 
-/* Tombol Upload File Premium */
 .file-input-wrapper { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
 .file-input-wrapper label { font-size: 0.9rem; color: var(--muted); font-weight: bold; }
 .file-input-custom {
@@ -135,7 +135,7 @@ animation: logoIntro 1.2s ease-out forwards;
 }
 .btn-submit:hover { background: var(--gold); color: #111; }
 
-/* WhatsApp & Audio Button */
+/* WhatsApp Floating Button & Music */
 .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
 padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition: transform 0.2s;}
 .wa-float:hover{transform: scale(1.05);}
@@ -231,15 +231,15 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <span class="badge">🧸 KIDS & FAMILY FAVORITE</span>
 <h2>BAKPAO KARAKTER PREMIUM</h2>
 <p>Bakpao premium bertekstur super lembut dengan bentuk karakter yang sangat menggemaskan. Seratus persen halal, higienis, sehat tanpa bahan pengawet, dengan varian isian rasa manis yang sangat disukai anak-anak maupun keluarga.</p>
-<div class="price">1 pack (isi 6) Rp25.000</div>
+<div class="price">1 pack (isi 6) Rp35.000</div>
 </div></div>
 
-<!-- ================= KOLOM REVIEWS DENGAN UPLOAD FOTO PRODAK ================= -->
+<!-- ================= KOLOM REVIEWS INTERAKTIF ================= -->
 <div class="review-section reveal reveal-scale">
   <h2>💬 TESTIMONI & FEEDBACK</h2>
   
   <div class="reviews-container" id="reviewsContainer">
-    <!-- Di-inject melalui JS (Dummy & Live Review) -->
+    <!-- Di-inject melalui JS -->
   </div>
 
   <div class="review-form">
@@ -257,7 +257,6 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
       <span data-value="5" class="active" onclick="setRating(5)">★</span>
     </div>
 
-    <!-- FIELD TAMBAHAN: UPLOAD FOTO -->
     <div class="file-input-wrapper">
       <label>Tambahkan Foto Produk (Opsional):</label>
       <input type="file" id="reviewImage" accept="image/*" class="file-input-custom">
@@ -271,6 +270,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 </div>
 <!-- ===================================================================== -->
 
+<!-- ⚠️ REVISI BARU: FITUR & KUALITAS KAMI DISEMBUNYIKAN SEMENTARA
 <div class="features reveal reveal-scale">
 <h2>Keunggulan & Kualitas Kami:</h2>
 <ul>
@@ -281,20 +281,28 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <li>Praktis Siap Kukus</li>
 </ul>
 </div>
+-->
 
 <div class="reseller reveal reveal-scale">
 <h2>🤝 Program Reseller</h2>
 <p>Dapatkan harga khusus reseller dan peluang keuntungan menarik.</p>
+<!-- ⚠️ REVISI BARU: NO WA RESELLER DISEMBUNYIKAN
 <p><strong>WhatsApp: +62 896-0331-6269</strong></p>
+-->
 </div>
 
 <div class="footer reveal reveal-scale">
-<h2>🛒 Pesan Sekarang</h2>
+<h2>🛒 MANTUL KITCHEN PREMIUM</h2>
+<p>Kelezatan Kuliner Resto-Grade Premium Untuk Keluarga Anda Di Rumah.</p>
+<!-- ⚠️ REVISI BARU: NO WA FOOTER DISEMBUNYIKAN
 <p>WhatsApp: +62 896-0331-6269</p>
+-->
 </div>
 </div>
 
+<!-- ⚠️ REVISI BARU: TOMBOL WA FLOATING DI KANAN BAWAH DISEMBUNYIKAN SEMENTARA
 <a class="wa-float" href="https://wa.me/6289603316269" target="_blank">WhatsApp</a>
+-->
 
 <script>
 // --- INTERSECTION OBSERVER ANIMATION ---
@@ -322,10 +330,9 @@ function toggleMusic() {
   else { audio.pause(); musicBtn.innerHTML = "🎵"; musicBtn.classList.remove('playing'); }
 }
 
-// --- ENGINE REVIEW + LIVE COMPRESS UPLOAD FOTO PRODAK ---
+// --- ENGINE REVIEW ---
 let selectedRating = 5;
 
-// Dummy reviews default awal (tanpa foto bawaan agar load awal super ringan)
 const defaultReviews = [
   { name: "Bunda Keysha", stars: 5, text: "Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha.", img: "" },
   { name: "Hendra Wijaya", stars: 5, text: "Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt.", img: "" },
@@ -363,7 +370,6 @@ function setRating(val) {
   });
 }
 
-// FUNGSI RAHASIA: Memperkecil resolusi & kompresi foto agar muat di localStorage
 function processImageAndSubmit(file, callback) {
   const reader = new FileReader();
   reader.readAsDataURL(file);
@@ -372,7 +378,7 @@ function processImageAndSubmit(file, callback) {
     img.src = event.target.result;
     img.onload = function () {
       const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 400; // Dikunci maksimum lebar 400px (Sangat cukup untuk ukuran card HP)
+      const MAX_WIDTH = 400;
       let width = img.width;
       let height = img.height;
 
@@ -385,8 +391,6 @@ function processImageAndSubmit(file, callback) {
       
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, width, height);
-      
-      // Hasil akhir dikompresi menjadi format JPEG dengan kualitas 60% (Super Ringan)
       const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
       callback(compressedBase64);
     };
@@ -427,13 +431,12 @@ function submitReview() {
     }
   };
 
-  // Cek apakah user menambahkan foto produk
   if (fileInput.files && fileInput.files[0]) {
     processImageAndSubmit(fileInput.files[0], function(compressedImg) {
       saveReview(compressedImg);
     });
   } else {
-    saveReview(""); // Kirim tanpa foto jika dilewati
+    saveReview("");
   }
 }
 
