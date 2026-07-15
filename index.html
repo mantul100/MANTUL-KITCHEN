@@ -18,7 +18,6 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-seri
 background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;}
 .hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
 
-/* Ukuran Logo Premium Diperbesar ke 450px + Animasi Intro */
 .brand-logo{
 width: 100%;
 max-width: 450px; 
@@ -38,25 +37,18 @@ animation: logoIntro 1.2s ease-out forwards;
 .hero h3{margin:0 0 15px 0;letter-spacing:1px}
 .hero p{max-width:700px;color:var(--muted);margin-bottom:25px;font-style:italic}
 
-/* Tombol Utama (Lihat Menu + Putar Musik) */
 .btn{display:inline-block;padding:14px 28px;background:var(--gold);color:#111;text-decoration:none;border-radius:999px;font-weight:bold;font-size:1.1rem;cursor:pointer;border:none;transition:all 0.3s ease}
 .btn:hover{transform:scale(1.05);box-shadow: 0 0 20px rgba(212,175,55,0.5);}
 
 .container{max-width:1100px;margin:auto;padding:20px}
 .section-title{text-align:center;color:var(--gold);margin:40px 0;font-size:2rem;letter-spacing:1px}
 
-/* --- VARIASI ANIMASI SCROLL PREMIUM (ANTI-BOSAN) --- */
+/* --- VARIATION SCROLL ANIMATION --- */
 .reveal { opacity: 0; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
-
-/* 1. Efek Muncul Membesar (Scale) */
 .reveal-scale { transform: scale(0.9); }
 .reveal-scale.show { opacity: 1; transform: scale(1); }
-
-/* 2. Efek Meluncur dari Kiri (Slide Left) */
 .reveal-left { transform: translateX(-80px); }
 .reveal-left.show { opacity: 1; transform: translateX(0); }
-
-/* 3. Efek Meluncur dari Kanan (Slide Right) */
 .reveal-right { transform: translateX(80px); }
 .reveal-right.show { opacity: 1; transform: translateX(0); }
 
@@ -91,42 +83,34 @@ animation: logoIntro 1.2s ease-out forwards;
   .bakpao-dual-grid img { height: auto; max-height: 420px; }
 }
 
-/* --- STYLING AREA FEEDBACK & REVIEWS BARU --- */
+/* --- STYLING AREA REVIEWS DENGAN FOTO --- */
 .review-section {
-  background: var(--card);
-  border-radius: 24px;
-  padding: 30px;
-  margin: 40px 0;
-  border: 1px solid #2a2a2e;
+  background: var(--card); border-radius: 24px; padding: 30px; margin: 40px 0; border: 1px solid #2a2a2e;
 }
 .review-section h2 { color: var(--gold); margin-top: 0; font-size: 1.8rem; text-align: center; }
-.reviews-container {
-  max-height: 350px;
-  overflow-y: auto;
-  margin-bottom: 25px;
-  padding-right: 10px;
-}
-/* Kustom Scrollbar untuk List Review */
+.reviews-container { max-height: 450px; overflow-y: auto; margin-bottom: 25px; padding-right: 10px; }
 .reviews-container::-webkit-scrollbar { width: 6px; }
 .reviews-container::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
 .review-item {
-  background: rgba(255,255,255,0.03);
-  border-left: 4px solid var(--gold);
-  padding: 15px;
-  border-radius: 0 12px 12px 0;
-  margin-bottom: 15px;
+  background: rgba(255,255,255,0.02); border-left: 4px solid var(--gold);
+  padding: 18px; border-radius: 0 12px 12px 0; margin-bottom: 15px;
 }
-.review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .reviewer-name { font-weight: bold; color: var(--text); }
 .review-stars { color: var(--gold); letter-spacing: 2px; }
-.review-text { color: var(--muted); font-size: 0.95rem; margin: 0; font-style: italic; }
+.review-text { color: var(--muted); font-size: 0.95rem; margin: 0 0 10px 0; font-style: italic; }
+
+/* Thumbnail Foto Review dari Pembeli */
+.review-attached-img {
+  display: block; max-width: 140px; height: 140px; object-fit: cover;
+  border-radius: 8px; border: 1px solid #3a3a3e; margin-top: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4); transition: transform 0.2s;
+}
+.review-attached-img:hover { transform: scale(1.05); cursor: pointer; }
 
 /* Form Input Review */
-.review-form {
-  border-top: 1px dashed #3a3a3e;
-  padding-top: 20px;
-}
+.review-form { border-top: 1px dashed #3a3a3e; padding-top: 20px; }
 .review-form h4 { margin: 0 0 15px 0; color: var(--text); font-size: 1.1rem; }
 .form-group { margin-bottom: 15px; }
 .form-group input, .form-group textarea {
@@ -134,9 +118,16 @@ animation: logoIntro 1.2s ease-out forwards;
   border-radius: 10px; color: var(--text); font-size: 1rem;
 }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
-.star-rating-input {
-  display: flex; gap: 8px; font-size: 1.5rem; color: #444; margin-bottom: 15px; cursor: pointer;
+
+/* Tombol Upload File Premium */
+.file-input-wrapper { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+.file-input-wrapper label { font-size: 0.9rem; color: var(--muted); font-weight: bold; }
+.file-input-custom {
+  background: #202023; border: 1px dashed var(--gold); color: var(--muted);
+  padding: 10px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; width: 100%;
 }
+
+.star-rating-input { display: flex; gap: 8px; font-size: 1.5rem; color: #444; margin-bottom: 15px; cursor: pointer; }
 .star-rating-input span:hover, .star-rating-input span.active { color: var(--gold); }
 .btn-submit {
   width: 100%; padding: 12px; background: transparent; border: 2px solid var(--gold);
@@ -144,12 +135,11 @@ animation: logoIntro 1.2s ease-out forwards;
 }
 .btn-submit:hover { background: var(--gold); color: #111; }
 
-/* Tombol WhatsApp (Kanan Bawah) */
+/* WhatsApp & Audio Button */
 .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
 padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition: transform 0.2s;}
 .wa-float:hover{transform: scale(1.05);}
 
-/* Tombol Kontrol Audio Mute/Unmute Minimalis (Kiri Bawah) */
 .music-control {
   position: fixed; left: 20px; bottom: 20px; background: rgba(23, 23, 25, 0.85);
   border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px;
@@ -232,7 +222,6 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <div class="price">1 porsi Rp15.000</div>
 </div></div>
 
-<!-- KARTU MENU BAKPAO 2 SLIDE LANGSUNG TERLIHAT -->
 <div class="card reveal reveal-scale">
 <div class="bakpao-dual-grid">
   <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter Baby Animal" class="bakpao-img-zoom">
@@ -242,19 +231,17 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <span class="badge">🧸 KIDS & FAMILY FAVORITE</span>
 <h2>BAKPAO KARAKTER PREMIUM</h2>
 <p>Bakpao premium bertekstur super lembut dengan bentuk karakter yang sangat menggemaskan. Seratus persen halal, higienis, sehat tanpa bahan pengawet, dengan varian isian rasa manis yang sangat disukai anak-anak maupun keluarga.</p>
-<div class="price">1 pack (isi 6) Rp25.000</div>
+<div class="price">1 pack (isi 6) Rp35.000</div>
 </div></div>
 
-<!-- ================= KOLOM FEEDBACK & REVIEW INTERAKTIF ================= -->
+<!-- ================= KOLOM REVIEWS DENGAN UPLOAD FOTO PRODAK ================= -->
 <div class="review-section reveal reveal-scale">
   <h2>💬 TESTIMONI & FEEDBACK</h2>
   
-  <!-- Tempat List Ulasan Muncul -->
   <div class="reviews-container" id="reviewsContainer">
-    <!-- Ulasan Bawaan Otomatis Ter-inject lewat JS -->
+    <!-- Di-inject melalui JS (Dummy & Live Review) -->
   </div>
 
-  <!-- Form Kirim Ulasan -->
   <div class="review-form">
     <h4>Yuk, Tulis Ulasan Jujur Anda:</h4>
     <div class="form-group">
@@ -270,6 +257,12 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
       <span data-value="5" class="active" onclick="setRating(5)">★</span>
     </div>
 
+    <!-- FIELD TAMBAHAN: UPLOAD FOTO -->
+    <div class="file-input-wrapper">
+      <label>Tambahkan Foto Produk (Opsional):</label>
+      <input type="file" id="reviewImage" accept="image/*" class="file-input-custom">
+    </div>
+
     <div class="form-group">
       <textarea id="reviewContent" rows="3" placeholder="Bagikan pengalaman kelezatan menu Mantul Kitchen..." required></textarea>
     </div>
@@ -279,7 +272,7 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <!-- ===================================================================== -->
 
 <div class="features reveal reveal-scale">
-<h2>Kualitas & Keunggulan Kami:</h2>
+<h2>Keunggulan & Kualitas Kami:</h2>
 <ul>
 <li>Dominan Daging</li>
 <li>Minim Tepung</li>
@@ -304,18 +297,11 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 <a class="wa-float" href="https://wa.me/6289603316269" target="_blank">WhatsApp</a>
 
 <script>
-// --- ANIMASI SCROLL INTERSECTION OBSERVER ---
+// --- INTERSECTION OBSERVER ANIMATION ---
 const revealElements = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-}, {
-  threshold: 0.15,
-  rootMargin: "0px 0px -40px 0px"
-});
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('show'); });
+}, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
 revealElements.forEach(el => observer.observe(el));
 
 // --- LOGIKA AUDIO ---
@@ -324,47 +310,38 @@ const musicBtn = document.getElementById('musicBtn');
 
 function lihatMenuDanPutarMusik() {
   if (audio.paused) {
-    audio.play().catch(e => console.log("Gagal memutar audio:", e));
-    musicBtn.innerHTML = "🔊";
-    musicBtn.classList.add('playing');
+    audio.play().catch(e => console.log("Audio play blocked:", e));
+    musicBtn.innerHTML = "🔊"; musicBtn.classList.add('playing');
   }
   musicBtn.classList.add('visible');
   document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
 }
 
 function toggleMusic() {
-  if (audio.paused) {
-    audio.play();
-    musicBtn.innerHTML = "🔊";
-    musicBtn.classList.add('playing');
-  } else {
-    audio.pause();
-    musicBtn.innerHTML = "🎵";
-    musicBtn.classList.remove('playing');
-  }
+  if (audio.paused) { audio.play(); musicBtn.innerHTML = "🔊"; musicBtn.classList.add('playing'); }
+  else { audio.pause(); musicBtn.innerHTML = "🎵"; musicBtn.classList.remove('playing'); }
 }
 
-// --- LOGIKA ENGINE REVIEW & FEEDBACK MANTUL KITCHEN ---
+// --- ENGINE REVIEW + LIVE COMPRESS UPLOAD FOTO PRODAK ---
 let selectedRating = 5;
 
-// Ulasan Master (Default bawaan untuk pancingan komersial)
+// Dummy reviews default awal (tanpa foto bawaan agar load awal super ringan)
 const defaultReviews = [
-  { name: "Bunda Keysha", stars: 5, text: "Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha." },
-  { name: "Hendra Wijaya", stars: 5, text: "Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt sama rasanya mas." },
-  { name: "Riana", stars: 4, text: "Ceker lada hitamnya empuk banget bumbunya nendang abis. Pas buat stock kulkas mager masak tinggal kukus beres." }
+  { name: "Bunda Keysha", stars: 5, text: "Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha.", img: "" },
+  { name: "Hendra Wijaya", stars: 5, text: "Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt.", img: "" },
+  { name: "Riana", stars: 4, text: "Ceker lada hitamnya empuk banget bumbunya nendang abis. Pas buat stock kulkas pas mager.", img: "" }
 ];
 
 function loadReviews() {
   const container = document.getElementById('reviewsContainer');
-  // Ambil ulasan buatan user dari localStorage
-  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews')) || [];
-  
-  // Gabungkan ulasan bawaan tetap dengan ulasan user
+  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews_v2')) || [];
   let allReviews = [...defaultReviews, ...userReviews];
   
   container.innerHTML = "";
   allReviews.forEach(rev => {
     let starsStr = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
+    let imgHtml = rev.img ? `<img src="${rev.img}" class="review-attached-img" alt="Foto dari Konsumen" onclick="window.open(this.src)">` : '';
+    
     container.innerHTML += `
       <div class="review-item">
         <div class="review-header">
@@ -372,6 +349,7 @@ function loadReviews() {
           <span class="review-stars">${starsStr}</span>
         </div>
         <p class="review-text">"${rev.text}"</p>
+        ${imgHtml}
       </div>
     `;
   });
@@ -379,46 +357,86 @@ function loadReviews() {
 
 function setRating(val) {
   selectedRating = val;
-  const stars = document.querySelectorAll('#starRatingInput span');
-  stars.forEach(star => {
-    if(parseInt(star.getAttribute('data-value')) <= val) {
-      star.classList.add('active');
-    } else {
-      star.classList.remove('active');
-    }
+  document.querySelectorAll('#starRatingInput span').forEach(star => {
+    let starVal = parseInt(star.getAttribute('data-value'));
+    star.classList.toggle('active', starVal <= val);
   });
+}
+
+// FUNGSI RAHASIA: Memperkecil resolusi & kompresi foto agar muat di localStorage
+function processImageAndSubmit(file, callback) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function (event) {
+    const img = new Image();
+    img.src = event.target.result;
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      const MAX_WIDTH = 400; // Dikunci maksimum lebar 400px (Sangat cukup untuk ukuran card HP)
+      let width = img.width;
+      let height = img.height;
+
+      if (width > MAX_WIDTH) {
+        height *= MAX_WIDTH / width;
+        width = MAX_WIDTH;
+      }
+      canvas.width = width;
+      canvas.height = height;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      // Hasil akhir dikompresi menjadi format JPEG dengan kualitas 60% (Super Ringan)
+      const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+      callback(compressedBase64);
+    };
+  };
 }
 
 function submitReview() {
   const nameInput = document.getElementById('reviewerName');
   const textInput = document.getElementById('reviewContent');
+  const fileInput = document.getElementById('reviewImage');
   
   if(!nameInput.value.trim() || !textInput.value.trim()) {
-    alert("Harap isi Nama dan Pesan Ulasan Anda terlebih dahulu, ya!");
+    alert("Harap isi Nama dan Ulasan Anda terlebih dahulu!");
     return;
   }
-  
-  let newReview = {
-    name: nameInput.value.trim(),
-    stars: selectedRating,
-    text: textInput.value.trim()
+
+  const saveReview = (imgBase64 = "") => {
+    let newReview = {
+      name: nameInput.value.trim(),
+      stars: selectedRating,
+      text: textInput.value.trim(),
+      img: imgBase64
+    };
+    
+    let userReviews = JSON.parse(localStorage.getItem('mantul_reviews_v2')) || [];
+    userReviews.unshift(newReview);
+    
+    try {
+      localStorage.setItem('mantul_reviews_v2', JSON.stringify(userReviews));
+      nameInput.value = "";
+      textInput.value = "";
+      fileInput.value = "";
+      setRating(5);
+      loadReviews();
+      alert("Terima kasih! Ulasan berfoto Anda berhasil ditayangkan di Mantul Kitchen! ❤️");
+    } catch (e) {
+      alert("Penyimpanan penuh! Coba unggah foto lain dengan ukuran lebih kecil ya.");
+    }
   };
-  
-  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews')) || [];
-  userReviews.unshift(newReview); // Ulasan baru ditaruh di paling atas list user
-  localStorage.setItem('mantul_reviews', JSON.stringify(userReviews));
-  
-  // Bersihkan form
-  nameInput.value = "";
-  textInput.value = "";
-  setRating(5);
-  
-  // Muat ulang
-  loadReviews();
-  alert("Terima kasih banyak atas feedback luar biasa Anda untuk Mantul Kitchen! ❤️");
+
+  // Cek apakah user menambahkan foto produk
+  if (fileInput.files && fileInput.files[0]) {
+    processImageAndSubmit(fileInput.files[0], function(compressedImg) {
+      saveReview(compressedImg);
+    });
+  } else {
+    saveReview(""); // Kirim tanpa foto jika dilewati
+  }
 }
 
-// Jalankan otomatis saat halaman dibuka
 window.onload = function() {
   loadReviews();
 };
