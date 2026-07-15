@@ -305,6 +305,10 @@ padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4
 -->
 
 <script>
+<script>
+// --- KONFIGURASI CLOUD ---
+const CLOUD_URL = "https://script.google.com/macros/s/AKfycbyTswbbp7_ae8SMPVhZJuve7Mk_xzawjC9asnervjm8UY__hGzxZ2TQKwqWPiaBc3AM/exec";
+
 // --- INTERSECTION OBSERVER ANIMATION ---
 const revealElements = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
@@ -330,7 +334,7 @@ function toggleMusic() {
   else { audio.pause(); musicBtn.innerHTML = "🎵"; musicBtn.classList.remove('playing'); }
 }
 
-// --- ENGINE REVIEW ---
+// --- ENGINE REVIEW CLOUD ---
 let selectedRating = 5;
 
 const defaultReviews = [
@@ -341,25 +345,33 @@ const defaultReviews = [
 
 function loadReviews() {
   const container = document.getElementById('reviewsContainer');
-  let userReviews = JSON.parse(localStorage.getItem('mantul_reviews_v2')) || [];
-  let allReviews = [...defaultReviews, ...userReviews];
+  container.innerHTML = "<em>Memuat ulasan dari server...</em>";
   
-  container.innerHTML = "";
-  allReviews.forEach(rev => {
-    let starsStr = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
-    let imgHtml = rev.img ? `<img src="${rev.img}" class="review-attached-img" alt="Foto dari Konsumen" onclick="window.open(this.src)">` : '';
-    
-    container.innerHTML += `
-      <div class="review-item">
-        <div class="review-header">
-          <span class="reviewer-name">${rev.name}</span>
-          <span class="review-stars">${starsStr}</span>
-        </div>
-        <p class="review-text">"${rev.text}"</p>
-        ${imgHtml}
-      </div>
-    `;
-  });
+  fetch(CLOUD_URL)
+    .then(res => res.json())
+    .then(data => {
+      container.innerHTML = "";
+      // Menggabungkan review bawaan + review dari Google Sheets
+      let allReviews = [...defaultReviews, ...(data.reviews || [])];
+      
+      allReviews.forEach(rev => {
+        let starsStr = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
+        let imgHtml = rev.img ? `<img src="${rev.img}" class="review-attached-img" onclick="window.open(this.src)">` : '';
+        
+        container.innerHTML += `
+          <div class="review-item">
+            <div class="review-header">
+              <span class="reviewer-name">${rev.name}</span>
+              <span class="review-stars">${starsStr}</span>
+            </div>
+            <p class="review-text">"${rev.text}"</p>
+            ${imgHtml}
+          </div>
+        `;
+      });
+    }).catch(err => {
+      container.innerHTML = "<em>Gagal memuat ulasan. Coba refresh halaman.</em>";
+    });
 }
 
 function setRating(val) {
@@ -378,7 +390,7 @@ function processImageAndSubmit(file, callback) {
     img.src = event.target.result;
     img.onload = function () {
       const canvas = document.createElement('canvas');
-      const MAX_WIDTH = 400;
+      const MAX_WIDTH = 200; // Dikecilkan agar foto pasti masuk ke Google Sheets
       let width = img.width;
       let height = img.height;
 
@@ -391,7 +403,7 @@ function processImageAndSubmit(file, callback) {
       
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, width, height);
-      const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+      const compressedBase64 = canvas.toDataURL('image/jpeg', 0.5);
       callback(compressedBase64);
     };
   };
@@ -407,36 +419,33 @@ function submitReview() {
     return;
   }
 
-  const saveReview = (imgBase64 = "") => {
-    let newReview = {
-      name: nameInput.value.trim(),
-      stars: selectedRating,
-      text: textInput.value.trim(),
-      img: imgBase64
-    };
-    
-    let userReviews = JSON.parse(localStorage.getItem('mantul_reviews_v2')) || [];
-    userReviews.unshift(newReview);
-    
-    try {
-      localStorage.setItem('mantul_reviews_v2', JSON.stringify(userReviews));
+  const sendToCloud = (imgBase64 = "") => {
+    fetch(CLOUD_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify({
+        type: 'REVIEW',
+        name: nameInput.value.trim(),
+        stars: selectedRating,
+        text: textInput.value.trim(),
+        img: imgBase64
+      })
+    }).then(() => {
+      alert("Terima kasih! Ulasan Anda telah terkirim ke server.");
       nameInput.value = "";
       textInput.value = "";
       fileInput.value = "";
       setRating(5);
-      loadReviews();
-      alert("Terima kasih! Ulasan berfoto Anda berhasil ditayangkan di Mantul Kitchen! ❤️");
-    } catch (e) {
-      alert("Penyimpanan penuh! Coba unggah foto lain dengan ukuran lebih kecil ya.");
-    }
+      loadReviews(); // Refresh otomatis
+    }).catch(err => {
+      alert("Gagal kirim ulasan. Pastikan koneksi internet stabil.");
+    });
   };
 
   if (fileInput.files && fileInput.files[0]) {
-    processImageAndSubmit(fileInput.files[0], function(compressedImg) {
-      saveReview(compressedImg);
-    });
+    processImageAndSubmit(fileInput.files[0], sendToCloud);
   } else {
-    saveReview("");
+    sendToCloud("");
   }
 }
 
@@ -444,6 +453,3 @@ window.onload = function() {
   loadReviews();
 };
 </script>
-
-</body>
-</html>
