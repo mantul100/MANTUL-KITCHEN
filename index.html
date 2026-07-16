@@ -462,19 +462,21 @@ function submitReview() {
     fetch(CLOUD_URL, {
       method: "POST",
       mode: "no-cors",
-      body: JSON.stringify({
-        type: 'REVIEW',
-        name: nameInput.value.trim(),
-        stars: selectedRating,
-        text: textInput.value.trim(),
-        img: imgBase64
+            body: JSON.stringify({
+            type: 'REVIEW',
+            name: nameInput.value.trim(),
+            stars: selectedRating,
+            text: textInput.value.trim(),
+            img: imgBase64,
+            kontak: document.getElementById('reviewerContact').value.trim() // Tambahkan baris ini
       })
     }).then(() => {
-      alert("Terima kasih! Ulasan Anda telah terkirim ke server.");
-      nameInput.value = "";
-      textInput.value = "";
-      fileInput.value = "";
-      setRating(5);
+          alert("Terima kasih! Ulasan Anda telah terkirim ke server.");
+    nameInput.value = "";
+    textInput.value = "";
+    fileInput.value = "";
+    document.getElementById('reviewerContact').value = ""; // Tambahkan baris ini untuk membersihkan form
+    setRating(5);
       loadReviews(); // Refresh otomatis
     }).catch(err => {
       alert("Gagal kirim ulasan. Pastikan koneksi internet stabil.");
