@@ -29,7 +29,7 @@ animation:bgMove 20s linear infinite;
 @keyframes bgMove{0%{transform:translate(0,0)}50%{transform:translate(50px,30px)}100%{transform:translate(0,0)}}
 #progressBar{position:fixed;top:0;left:0;height:3px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
-/* ===== TOAST NOTIFICATION ===== */
+/* ===== TOAST ===== */
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--gold);color:#111;padding:12px 24px;border-radius:30px;font-weight:700;font-size:0.9rem;box-shadow:0 8px 30px rgba(212,175,55,0.4);z-index:99999;opacity:0;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(-10px)}
 </style>
@@ -39,26 +39,25 @@ animation:bgMove 20s linear infinite;
 <div id="toast">✅ Produk ditambahkan!</div>
 <style>
 /* ===== HERO ===== */
-.hero{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 20px 20px;position:relative}
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 20px 20px;position:relative}
 .hero-content{z-index:2;width:100%;max-width:600px;margin:0 auto}
 .brand-logo{width:100%;max-width:280px;height:auto;margin:0 auto 10px;filter:drop-shadow(0 8px 30px rgba(212,175,55,0.2));animation:logoIntro 1s ease-out}
 @keyframes logoIntro{from{opacity:0;transform:scale(0.9) translateY(-20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .hero h1{font-size:2.2rem;letter-spacing:3px;color:var(--gold);margin:0 0 2px;font-weight:800}
 .hero h3{font-size:0.9rem;color:var(--muted);margin:0 0 6px;font-weight:400;letter-spacing:1px}
 .hero p{font-size:0.85rem;color:#999;margin:0 0 15px;font-style:italic}
+.btn-hero{display:inline-block;padding:12px 32px;background:var(--gold);color:#111;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(212,175,55,0.3)}
+.btn-hero:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(212,175,55,0.5)}
 /* ===== SEARCH ===== */
 .search-container{max-width:400px;margin:0 auto 15px;padding:0 10px}
 .search-container input{width:100%;padding:10px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:30px;color:var(--text);font-size:0.9rem;backdrop-filter:blur(8px);transition:all 0.3s}
 .search-container input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 20px rgba(212,175,55,0.1)}
 .search-container input::placeholder{color:#666}
-/* ===== FILTER ===== */
 .filter-container{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:20px}
 .filter-btn{padding:5px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:600;font-size:0.75rem;cursor:pointer;transition:all 0.3s}
 .filter-btn:hover,.filter-btn.active{background:var(--gold);color:#111;border-color:var(--gold)}
-</style>
-<style>
 /* ===== CARD ===== */
-.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin:16px 0;box-shadow:var(--shadow);transition:all 0.4s cubic-bezier(0.25,1,0.5,1);opacity:0;transform:translateY(30px) scale(0.95)}
+.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin:16px 0;box-shadow:var(--shadow);opacity:0;transform:translateY(30px) scale(0.95);transition:all 0.4s cubic-bezier(0.25,1,0.5,1)}
 .card.show{opacity:1;transform:translateY(0) scale(1)}
 .card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
 .card img{width:100%;height:200px;object-fit:cover;transition:transform 0.6s}
@@ -76,13 +75,13 @@ animation:bgMove 20s linear infinite;
 .btn-cart-add{background:var(--gold);color:#111;border:none;padding:5px 12px;border-radius:30px;font-weight:700;font-size:0.7rem;cursor:pointer;transition:0.3s;margin-top:6px;width:100%}
 .btn-cart-add:hover{background:#fff;transform:scale(1.02)}
 .btn-cart-add.secondary{background:#2a2a2e;color:#fff}
-</style>
-<style>
 .menu-section-header{font-size:1.3rem;font-weight:800;color:var(--gold);margin:25px 0 12px;padding-bottom:6px;border-bottom:2px solid rgba(212,175,55,0.15);display:flex;align-items:center;gap:10px}
 .menu-section-header span{font-size:1.4rem}
 .bakpao-dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 12px 0}
 .bakpao-dual-grid img{width:100%;height:180px;border-radius:12px;border:1px solid var(--border);object-fit:cover}
 .bakpao-img-catalog{object-fit:contain;background:#1c1c1e}
+</style>
+<style>
 /* ===== FLOATING BUTTONS ===== */
 .float-group{position:fixed;bottom:20px;right:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:99}
 .float-group .btn-float{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;text-decoration:none;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.4);transition:all 0.3s;border:none;cursor:pointer}
@@ -102,8 +101,7 @@ animation:bgMove 20s linear infinite;
 #backToTop{opacity:0;transform:translateY(20px);transition:all 0.4s;pointer-events:none}
 #backToTop.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 @media(max-width:480px){.float-group .btn-float{width:40px;height:40px;font-size:1rem}#mascot{width:45px;height:45px}.card img{height:160px}}
-</style>
-<style>
+/* ===== REVIEW ===== */
 .review-section{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:20px;margin:25px 0}
 .review-section h2{color:var(--gold);text-align:center;font-size:1.3rem;margin:0 0 12px}
 .carousel-wrapper{overflow:hidden;position:relative;border-radius:12px;touch-action:pan-y}
@@ -122,8 +120,7 @@ animation:bgMove 20s linear infinite;
 .lightbox.active{display:flex}
 .lightbox img{max-width:90%;max-height:90%;border-radius:12px;border:2px solid var(--gold)}
 .lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer}
-</style>
-<style>
+/* ===== CART SHEET ===== */
 .cart-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9998}
 .cart-overlay.active{display:block}
 .cart-sheet{position:fixed;bottom:0;left:0;width:100%;max-height:80vh;background:#1a1a1c;border-radius:24px 24px 0 0;padding:16px 20px 20px;z-index:9999;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 -10px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column}
@@ -140,7 +137,6 @@ animation:bgMove 20s linear infinite;
 .cart-total{font-weight:700;font-size:1rem;color:var(--gold);padding:10px 0;border-top:2px solid var(--gold);margin-top:6px}
 .btn-wa-cart{background:#25D366;color:#111;border:none;padding:10px;border-radius:30px;font-weight:700;font-size:0.95rem;cursor:pointer;margin-top:6px;width:100%}
 .btn-clear-cart{background:transparent;border:1px solid #555;color:#999;padding:6px;border-radius:30px;font-size:0.75rem;cursor:pointer;width:100%;margin-top:4px}
-/* ===== REVIEW FORM RESPONSIVE ===== */
 .review-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .review-form-grid .full{grid-column:1/-1}
 .review-form-grid input,.review-form-grid textarea{background:var(--input);border:1px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--text);font-size:0.85rem;width:100%}
@@ -155,18 +151,18 @@ animation:bgMove 20s linear infinite;
 </head>
 <body>
 <audio id="bgMusic" loop><source src="musik.mp3" type="audio/mpeg"></audio>
-
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section class="hero">
 <div class="hero-content">
 <img src="logo.png" alt="Mantul Kitchen" class="brand-logo">
 <h1>MANTUL KITCHEN</h1>
 <h3>Premium Frozen Food</h3>
 <p>"Kualitas Restoran Bintang Lima, Kini Hadir di Meja Makan Rumah Anda"</p>
+<button class="btn-hero" onclick="lihatMenuDanPutarMusik()">🍲 Lihat Menu</button>
 </div>
 </section>
 
-<!-- SEARCH & FILTER -->
+<!-- ===== SEARCH & FILTER ===== -->
 <div style="max-width:1100px;margin:0 auto;padding:0 14px">
 <div class="search-container"><input type="text" id="searchInput" placeholder="🔍 Cari menu favorit..." oninput="filterMenu()"></div>
 <div class="filter-container">
@@ -177,7 +173,7 @@ animation:bgMove 20s linear infinite;
 </div>
 <div id="menuContainer">
 
-<!-- FLOATING BUTTONS -->
+<!-- ===== FLOATING BUTTONS ===== -->
 <div class="float-group">
 <button class="btn-float btn-music" id="musicBtn" onclick="toggleMusic()">🎵</button>
 <button class="btn-float btn-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
@@ -189,15 +185,52 @@ animation:bgMove 20s linear infinite;
 </a>
 </div>
 
-<!-- PANDA -->
+<!-- ===== PANDA ===== -->
 <div id="mascot"><img id="pandaImg" src="panda_normal.gif" alt="Panda"><span class="speech" id="speechBubble">Halo! 🥟</span></div>
 
-<!-- CART TOGGLE BUTTON -->
+<!-- ===== CART BUTTON ===== -->
 <div style="position:fixed;top:12px;right:12px;z-index:99">
 <button onclick="toggleCart()" style="background:var(--gold);color:#111;border:none;padding:8px 14px;border-radius:30px;font-weight:700;font-size:0.75rem;box-shadow:0 4px 15px rgba(0,0,0,0.4);display:flex;align-items:center;gap:4px;cursor:pointer">
 🛒 <span id="cartCountBadge" style="background:#111;color:#fff;border-radius:50%;padding:1px 6px;font-size:0.65rem">0</span>
 </button>
 </div>
+<!-- ===== BEST SELLER ===== -->
+<div class="menu-section-header"><span>🔥</span> BEST SELLER</div>
+
+<!-- DIMSUM PREMIUM -->
+<div class="card" data-category="mix" data-name="Dimsum Premium">
+<img src="01_Dimsum_Premium.png" alt="Dimsum 25gr">
+<div class="content">
+<span class="badge">🔥 BEST SELLER</span>
+<span class="badge-serving badge-mix">🍽️ Mix</span>
+<span class="badge-weight">⚖️ 25gr / Pcs</span>
+<h2 style="font-size:1.1rem;margin:4px 0">DIMSUM PREMIUM (25gr)</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Daging ayam juicy dengan bumbu umami autentik.</p>
+<p style="font-size:0.75rem;color:#888;margin:2px 0">✨ Varian: Mozarella, Ayam Jamur, Smoke Beef, Sosis, Crabstick.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.85rem">
+    <span>5 pcs <b>Rp17.500</b></span>
+    <span>10 pcs <b>Rp35.000</b></span>
+  </span>
+  <small>*Free Saos Spesial</small>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Dimsum Premium','Pack isi 5',17500,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add secondary" onclick="addToCart('Dimsum Premium','Pack isi 10',35000,10)">+ Tambah (isi 10)</button>
+</div></div>
+
+<!-- STEAM CEKER -->
+<div class="card" data-category="kukus" data-name="Steam Ceker">
+<img src="05_Ceker_Saus_Lada_Premium.png" alt="Ceker">
+<div class="content">
+<span class="badge">🌟 FAVORIT PELANGGAN</span>
+<span class="badge-serving badge-kukus">🥟 Kukus</span>
+<h2 style="font-size:1.1rem;margin:4px 0">STEAM CEKER LADA HITAM</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Slow-steam hingga empuk, saus lada hitam pekat meresap.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">1 pack <b>Rp15.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Steam Ceker','Pack',15000,1)">+ Tambah</button>
+</div></div>
 <!-- ===== DIMSUM COLLECTION ===== -->
 <div class="menu-section-header"><span>🥟</span> DIMSUM COLLECTION</div>
 
@@ -210,7 +243,7 @@ animation:bgMove 20s linear infinite;
 <span class="badge-weight">⚖️ 35gr / Pcs</span>
 <h2 style="font-size:1.1rem;margin:4px 0">DIMSUM JUMBO (35gr)</h2>
 <p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Ekstra besar, isian daging ayam padat melimpah.</p>
-<p style="font-size:0.75rem;color:#888;margin:2px 0">✨ Topping: Telor Puyuh, Mozarella, Udang, Sosis, Nori, Jamur.</p>
+<p style="font-size:0.75rem;color:#888;margin:2px 0">✨ Topping: Telor Puyuh, Mozarella, Udang, Sosis, Nori, Jamur, Smoke Beef, Crabstick.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
 <div class="price">16 pcs <b>Rp60.000</b><br><small>*Free Saos & Chili Oil</small></div>
 <button class="btn-cart-add" onclick="addToCart('Dimsum Jumbo','Pack isi 16',60000,16)">+ Tambah</button>
@@ -247,30 +280,121 @@ animation:bgMove 20s linear infinite;
 <button class="btn-cart-add" onclick="addToCart('Gyoza Premium','Pack isi 5',17500,5)">+ Tambah (isi 5)</button>
 <button class="btn-cart-add secondary" onclick="addToCart('Gyoza Premium','Pack isi 10',33000,10)">+ Tambah (isi 10)</button>
 </div></div>
+<!-- ===== LUMPIA & SNACK ===== -->
+<div class="menu-section-header"><span>🌯</span> LUMPIA & SNACK</div>
+
+<!-- WONTON UDANG -->
+<div class="card" data-category="goreng" data-name="Wonton Udang">
+<img src="03_Wonton_Udang_Premium.png" alt="Wonton">
+<div class="content">
+<span class="badge">🍤 HIGHLY RECOMMENDED</span>
+<span class="badge-serving badge-goreng">🍤 Goreng</span>
+<h2 style="font-size:1.1rem;margin:4px 0">WONTON UDANG PREMIUM</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Udang utuh pilihan dalam kulit wonton sutra.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.85rem">
+    <span>5 pcs <b>Rp25.000</b></span>
+    <span>10 pcs <b>Rp50.000</b></span>
+  </span>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Wonton Udang','Pack isi 5',25000,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add secondary" onclick="addToCart('Wonton Udang','Pack isi 10',50000,10)">+ Tambah (isi 10)</button>
+</div></div>
+
+<!-- LUMPIA UDANG -->
+<div class="card" data-category="goreng" data-name="Lumpia Udang">
+<img src="04_Lumpia_Udang.png" alt="Lumpia Udang">
+<div class="content">
+<span class="badge">🥢 PREMIUM LINE</span>
+<span class="badge-serving badge-goreng">🍤 Goreng</span>
+<h2 style="font-size:1.1rem;margin:4px 0">LUMPIA KULIT TAHU UDANG</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Udang segar dibalut kulit tahu, renyah wangi.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.85rem">
+    <span>5 pcs <b>Rp25.000</b></span>
+    <span>10 pcs <b>Rp50.000</b></span>
+  </span>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Lumpia Udang','Pack isi 5',25000,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add secondary" onclick="addToCart('Lumpia Udang','Pack isi 10',50000,10)">+ Tambah (isi 10)</button>
+</div></div>
+
+<!-- LUMPIA AYAM -->
+<div class="card" data-category="goreng" data-name="Lumpia Ayam">
+<img src="04_Lumpia_Ayam.png" alt="Lumpia Ayam">
+<div class="content">
+<span class="badge">🥢 PREMIUM LINE</span>
+<span class="badge-serving badge-goreng">🍤 Goreng</span>
+<h2 style="font-size:1.1rem;margin:4px 0">LUMPIA AYAM JAMUR</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Ayam segar & jamur spesial dengan minyak wijen wangi.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.85rem">
+    <span>5 pcs <b>Rp25.000</b></span>
+    <span>10 pcs <b>Rp50.000</b></span>
+  </span>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Lumpia Ayam','Pack isi 5',25000,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add secondary" onclick="addToCart('Lumpia Ayam','Pack isi 10',50000,10)">+ Tambah (isi 10)</button>
+</div></div>
+
+<!-- BAKPAO -->
+<div class="card" data-category="kukus" data-name="Bakpao">
+<div class="bakpao-dual-grid">
+  <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter">
+  <img src="06_Bakpao_Katalog_List.png" alt="Katalog Bakpao" class="bakpao-img-catalog">
+</div>
+<div class="content">
+<span class="badge">🧸 KIDS & FAMILY</span>
+<span class="badge-serving badge-kukus">🥟 Kukus</span>
+<h2 style="font-size:1.1rem;margin:4px 0">BAKPAO KARAKTER PREMIUM</h2>
+<p style="font-size:0.8rem;color:var(--muted);margin:2px 0">Lembut seperti awan, bentuk karakter menggemaskan.</p>
+<div class="storage-info">❄️ Simpan di Freezer -18°C</div>
+<div class="price">1 pack (isi 6) <b>Rp25.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Bakpao','Pack isi 6',25000,6)">+ Tambah</button>
+</div></div>
+</div>
 <!-- ===== PANDUAN PENYAJIAN ===== -->
 <div style="background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:20px;margin:25px 0">
 <h2 style="color:var(--gold);text-align:center;font-size:1.3rem;margin:0 0 12px">🍳 PANDUAN PENYAJIAN</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:14px;border:1px solid var(--border)">
-<h3 style="color:#00bcd4;font-size:1rem;margin:0 0 6px">🥟 Kukus</h3>
-<p style="font-size:0.8rem;color:var(--muted)"><b>Cocok:</b> Dimsum, Gyoza, Wonton, Bakpao, Ceker.</p>
-<p style="font-size:0.8rem;color:#aaa">Kukus 6-10 menit api kecil. Sajikan hangat.</p>
-</div>
-<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:14px;border:1px solid var(--border)">
-<h3 style="color:#ff8c00;font-size:1rem;margin:0 0 6px">🍤 Goreng</h3>
-<p style="font-size:0.8rem;color:var(--muted)"><b>Cocok:</b> Dimsum Goreng, Lumpia, Wonton.</p>
-<p style="font-size:0.8rem;color:#aaa">Goreng dengan api kecil hingga golden brown.</p>
-</div>
-</div>
-<div style="margin-top:14px;background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;border:1px solid var(--gold);text-align:center">
-<h4 style="color:var(--gold);margin:0 0 4px">❄️ Durasi Simpan</h4>
-<div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:0.8rem;color:var(--muted)">
-<span>🧊 Freezer 3 bulan</span><span>🌡️ Suhu Ruang 12 jam</span><span>🧊 Chiller 2 hari</span>
-</div>
-</div>
+
+<!-- KUKUS -->
+<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;border:1px solid var(--border)">
+<h3 style="color:#00bcd4;font-size:1rem;margin:0 0 6px">🥟 Kukus (Steam)</h3>
+<p style="font-size:0.8rem;color:var(--muted);margin:4px 0"><b>Cocok untuk:</b> Dimsum, Gyoza, Wonton Udang, Bakpao, &amp; Steam Ceker.</p>
+<p style="font-size:0.8rem;color:var(--text);margin:6px 0"><b>Persiapan:</b> Panaskan kukusan hingga air mendidih. Olesi wadah dengan sedikit minyak atau beri alas agar tidak lengket.</p>
+<p style="font-size:0.8rem;color:var(--text);margin:4px 0"><b>Cara &amp; Waktu:</b> Masukkan bahan, lalu kecilkan api. Kukus selama <b>6–10 menit</b> menggunakan api kecil hingga matang.</p>
+<p style="font-size:0.75rem;color:#ff9800;margin:4px 0"><i>⚠️ Catatan:</i> Jangan kukus terlalu lama agar kulit tidak lembek dan aromanya tidak hilang.</p>
+<p style="font-size:0.8rem;color:var(--muted);margin:4px 0"><b>Saran Penyajian:</b> Sajikan hangat bersama saus sambal atau chili oil.</p>
 </div>
 
-<!-- ===== REVIEW SECTION ===== -->
+<!-- GORENG -->
+<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;border:1px solid var(--border)">
+<h3 style="color:#ff8c00;font-size:1rem;margin:0 0 6px">🍤 Goreng (Fried)</h3>
+<p style="font-size:0.8rem;color:var(--muted);margin:4px 0"><b>Cocok untuk:</b> Dimsum Goreng Lumer, Lumpia Ayam Jamur, Lumpia Kulit Tahu, &amp; Wonton Udang.</p>
+<p style="font-size:0.8rem;color:var(--text);margin:6px 0"><b>Persiapan:</b> Panaskan minyak dalam jumlah cukup (hingga bahan agak terendam).</p>
+<p style="font-size:0.8rem;color:var(--text);margin:4px 0"><b>Tips Khusus:</b> Untuk Wonton Udang, balur dengan telur kocok terlebih dahulu agar lebih krispi.</p>
+<p style="font-size:0.8rem;color:var(--text);margin:4px 0"><b>Cara &amp; Waktu:</b> Masukkan bahan saat minyak panas, lalu segera kecilkan api. Goreng dengan api kecil sambil sesekali dibalik hingga berwarna <b>cokelat keemasan (golden brown)</b> secara merata.</p>
+<p style="font-size:0.8rem;color:var(--muted);margin:4px 0"><b>Saran Penyajian:</b> Angkat, tiriskan, dan sajikan selagi krispi bersama saus sambal atau chili oil.</p>
+</div>
+
+</div>
+
+<!-- DURASI SIMPAN -->
+<div style="margin-top:16px;background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;border:1px solid var(--gold);text-align:center">
+<h4 style="color:var(--gold);margin:0 0 4px">❄️ Panduan Durasi Simpan</h4>
+<div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:0.8rem;color:var(--muted)">
+<span>🧊 <b>Freezer</b> — 3 bulan</span>
+<span>🌡️ <b>Suhu Ruang</b> — 12 jam</span>
+<span>🧊 <b>Chiller / Kulkas</b> — 2 hari</span>
+</div>
+<p style="font-size:0.7rem;color:#888;margin-top:6px;">⚠️ Disarankan menyimpan produk dalam kondisi beku (freezer) untuk menjaga kualitas terbaik.</p>
+</div>
+</div>
+<!-- ===== REVIEW CAROUSEL ===== -->
 <div class="review-section">
 <h2>💬 TESTIMONI</h2>
 <div class="carousel-wrapper" id="carouselWrapper">
@@ -297,8 +421,7 @@ animation:bgMove 20s linear infinite;
 </div>
 </div>
 </div>
-
-<!-- ===== BOTTOM CART SHEET ===== -->
+<!-- ===== CART SHEET ===== -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sheet" id="cartSheet">
 <div class="handle"></div>
@@ -345,6 +468,21 @@ animation:bgMove 20s linear infinite;
 const CLOUD_URL = "https://script.google.com/macros/s/AKfycbzI6-_z0LtWs6hC9M0oSak_DdYLtTHBAQqZsQV4CIYAbCmMeW_t3y8yLULYiQZuDiav/exec";
 let currentFilter = 'all';
 let allReviews = [];
+
+// ============================================================
+// LIAT MENU & PUTAR MUSIK
+// ============================================================
+function lihatMenuDanPutarMusik(){
+  const menuEl = document.getElementById('menuContainer');
+  if(menuEl) menuEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Putar musik jika belum diputar
+  const audio = document.getElementById('bgMusic');
+  if(audio && audio.paused){
+    audio.play().catch(()=>{});
+    const btn = document.getElementById('musicBtn');
+    if(btn){ btn.classList.add('playing'); btn.innerHTML = '🔊'; }
+  }
+}
 
 // ============================================================
 // SEARCH & FILTER
@@ -412,7 +550,7 @@ wrapper.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; isDragg
 wrapper.addEventListener('touchmove', e=>{ if(!isDragging)return; const diff = startX - e.touches[0].clientX; if(Math.abs(diff)>50){ if(diff>0) nextReview(); else goToReview(reviewIndex-1); isDragging=false; } });
 wrapper.addEventListener('touchend', ()=>{ isDragging=false; });
 // ============================================================
-// CART LOGIC (LocalStorage)
+// CART LOGIC
 // ============================================================
 let cart = JSON.parse(localStorage.getItem('mantulCart')) || [];
 function saveCart(){ localStorage.setItem('mantulCart', JSON.stringify(cart)); renderCartBadge(); }
@@ -513,7 +651,7 @@ function submitReview(){
 function openLightbox(src){ document.getElementById('lightboxImg').src=src; document.getElementById('lightbox').classList.add('active'); }
 function closeLightbox(){ document.getElementById('lightbox').classList.remove('active'); }
 // ============================================================
-// PANDA INTERAKTIF
+// PANDA
 // ============================================================
 const pandaImg = document.getElementById('pandaImg');
 const speech = document.getElementById('speechBubble');
@@ -538,7 +676,7 @@ document.addEventListener('visibilitychange', ()=>{
 });
 
 // ============================================================
-// SCROLL ANIMATION (STAGGER + SLIDE)
+// SCROLL ANIMATION (STAGGER)
 // ============================================================
 const cards = document.querySelectorAll('.card');
 const observer = new IntersectionObserver((entries)=>{
@@ -570,7 +708,6 @@ window.addEventListener('scroll', ()=>{
   if(scrollTop > 200) btn.classList.add('visible');
   else btn.classList.remove('visible');
 });
-
 // ============================================================
 // INIT
 // ============================================================
