@@ -2,931 +2,637 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MANTUL KITCHEN - Premium Frozen Food</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
---bg:#0b0b0c;--card:#171719;--gold:#d4af37;--text:#f5f5f5;--muted:#bdbdbd;--accent:#7a0e0e;
---success:#25D366;
+--bg:#0b0b0c;--card:rgba(255,255,255,0.04);--gold:#d4af37;--text:#f5f5f5;--muted:#bdbdbd;
+--border:rgba(255,255,255,0.08);--input:#202023;--success:#25D366;--danger:#ff4d4d;--gold-light:rgba(212,175,55,0.08);
+--shadow:0 8px 32px rgba(0,0,0,0.4);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',Arial,sans-serif;overflow-x:hidden}
-
-/* ===== SCROLL PROGRESS BAR ===== */
-#progressBar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: var(--gold);
-    width: 0%;
-    z-index: 9999;
-    transition: width 0.1s;
-    box-shadow: 0 0 20px rgba(212,175,55,0.5);
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;padding-bottom:100px}
+/* ===== ANIMATED BACKGROUND FRESH ===== */
+body::before{
+content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;
+background:radial-gradient(circle at 20% 30%, rgba(212,175,55,0.05) 0%, transparent 50%),
+radial-gradient(circle at 80% 70%, rgba(212,175,55,0.03) 0%, transparent 50%),
+#0b0b0c;
+animation:bgPulse 12s ease-in-out infinite alternate;
 }
-
-/* ===== PANDA INTERAKTIF (DIAM DI POJOK) ===== */
-.mascot {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
-    z-index: 999;
-    cursor: pointer;
-    filter: drop-shadow(0 10px 30px rgba(212, 175, 55, 0.3));
-    pointer-events: auto;
-    transition: transform 0.3s ease;
-    user-select: none;
+@keyframes bgPulse{
+0%{opacity:0.6}100%{opacity:1}
 }
-.mascot img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+body::after{
+content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+background-image:radial-gradient(circle at 30% 40%, rgba(255,215,0,0.02) 0%, transparent 60%);
+animation:bgMove 20s linear infinite;
 }
-.mascot.bounce {
-    animation: mascotBounce 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-.mascot .speech-bubble {
-    position: absolute;
-    bottom: 90px;
-    right: 0;
-    background: rgba(23,23,25,0.9);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    white-space: nowrap;
-    border: 1px solid var(--gold);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    opacity: 0;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    transform: translateY(10px);
-    pointer-events: none;
-}
-.mascot .speech-bubble.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-@keyframes mascotBounce {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2) rotate(-5deg); }
-    50% { transform: scale(0.9) rotate(5deg); }
-    75% { transform: scale(1.05) rotate(-2deg); }
-    100% { transform: scale(1); }
-}
-
-/* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;
-background:radial-gradient(circle at top, rgba(212,175,55,.15), transparent 40%), #0b0b0c;position:relative;overflow:hidden;}
-.hero::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.03) 0%, transparent 60%);
-    animation: particleGlow 8s ease-in-out infinite alternate;
-}
-@keyframes particleGlow {
-    0% { transform: translate(-10%, -10%) scale(1); opacity: 0.5; }
-    100% { transform: translate(10%, 10%) scale(1.2); opacity: 1; }
-}
-.hero-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;position:relative;z-index:2;}
-
-.brand-logo{
-width:100%;max-width:450px;height:auto;margin-bottom:15px;object-fit:contain;
-filter:drop-shadow(0px 8px 20px rgba(0,0,0,0.7));
-animation:logoIntro 1.2s ease-out forwards;
-}
-@keyframes logoIntro { from { opacity:0; transform:scale(0.8) translateY(-20px); } to { opacity:1; transform:scale(1) translateY(0); } }
-
-.hero h1{font-size:3rem;letter-spacing:3px;color:var(--gold);margin:0 0 10px 0}
-.hero h3{margin:0 0 15px 0;letter-spacing:1px}
-.hero p{max-width:700px;color:var(--muted);margin-bottom:25px;font-style:italic}
-.btn{display:inline-block;padding:14px 28px;background:var(--gold);color:#111;text-decoration:none;border-radius:999px;font-weight:bold;font-size:1.1rem;cursor:pointer;border:none;transition:all 0.3s ease}
-.btn:hover{transform:scale(1.05);box-shadow: 0 0 20px rgba(212,175,55,0.5);}
-
-.social-link-hero {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
-}
-.social-link-hero:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(225, 48, 108, 0.5); }
-
-.container{max-width:1100px;margin:auto;padding:20px}
-.section-title{text-align:center;color:var(--gold);margin:40px 0;font-size:2rem;letter-spacing:1px}
-
-/* ===== BADGE ===== */
-.badge-serving { display:inline-block; padding:4px 14px; border-radius:20px; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-right:6px; }
-.badge-goreng { background:#ff8c00; color:#111; }
-.badge-kukus { background:#00bcd4; color:#111; }
-.badge-mix { background:#9c27b0; color:#fff; }
-.badge-weight { display:inline-block; padding:2px 10px; border-radius:12px; font-size:0.7rem; background:rgba(255,255,255,0.05); border:1px solid #2a2a2e; color:var(--muted); }
-.storage-info { font-size:0.75rem; color:#888; margin-top:4px; display:flex; align-items:center; gap:6px; }
-
-/* ===== FILTER ===== */
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 40px;
-}
-.filter-btn {
-    padding: 8px 24px;
-    border-radius: 999px;
-    border: 1px solid #2a2a2e;
-    background: transparent;
-    color: var(--muted);
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.filter-btn:hover, .filter-btn.active {
-    background: var(--gold);
-    color: #111;
-    border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(212,175,55,0.2);
-}
-
-/* ===== STAGGER ===== */
-.reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-.reveal-scale { transform: scale(0.9); }
-.reveal-scale.show { opacity: 1; transform: scale(1); }
-.reveal-left { transform: translateX(-80px); }
-.reveal-left.show { opacity: 1; transform: translateX(0); }
-.reveal-right { transform: translateX(80px); }
-.reveal-right.show { opacity: 1; transform: translateX(0); }
-.reveal-stagger { transition-delay: calc(var(--order, 0) * 0.08s); }
-
-/* ===== CARD ===== */
-.card{background:var(--card);border-radius:24px;overflow:hidden;margin:34px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.card img{width:100%;height:320px;object-fit:cover;transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);}
-.card:hover img { transform: scale(1.05); }
-.content{padding:20px}
-.badge{display:inline-block;background:var(--gold);color:#111;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:bold;margin-bottom:10px}
-.price{margin-top:10px;color:var(--gold);font-weight:bold;line-height:1.8;font-size:1.1rem}
-.features,.reseller,.footer{background:var(--card);border-radius:24px;padding:24px;margin:24px 0}
-.features ul{line-height:2}
-.features h2,.reseller h2,.footer h2{color:var(--gold);margin-top:0}
-
-.bakpao-dual-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:24px 24px 0 24px; }
-.bakpao-dual-grid img { width:100%; height:380px; border-radius:16px; border:1px solid #2a2a2e; }
-.bakpao-img-zoom { object-fit:cover; }
-.bakpao-img-catalog { object-fit:contain; background:#1c1c1e; }
-
-.menu-section-header {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--gold);
-    margin: 50px 0 20px 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(212,175,55,0.2);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.menu-section-header span { font-size: 2rem; }
-
-/* ===== REVIEW CAROUSEL ===== */
-.review-carousel-wrapper {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 25px;
-}
-.review-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.review-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    background: rgba(255,255,255,0.02);
-    border-left: 4px solid var(--gold);
-    padding: 18px;
-    border-radius: 0 12px 12px 0;
-}
-.review-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-.reviewer-name { font-weight:bold; color:var(--text); }
-.review-stars { color:var(--gold); letter-spacing:2px; }
-.review-text { color:var(--muted); font-size:0.95rem; margin:0 0 10px 0; font-style:italic; }
-.review-attached-img { display:block; max-width:140px; height:140px; object-fit:cover; border-radius:8px; border:1px solid #3a3a3e; margin-top:8px; box-shadow:0 4px 10px rgba(0,0,0,0.4); cursor:pointer; transition:transform 0.2s; }
-.review-attached-img:hover { transform:scale(1.05); }
-.carousel-dots { display:flex; justify-content:center; gap:10px; margin-bottom:20px; }
-.carousel-dots span { width:12px; height:12px; border-radius:50%; background:#3a3a3e; cursor:pointer; transition:0.3s; }
-.carousel-dots span.active { background:var(--gold); width:30px; border-radius:10px; }
-
-/* ===== LIGHTBOX ===== */
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 99999;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-}
-.lightbox.active { display: flex; }
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 12px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    border: 2px solid var(--gold);
-}
-.lightbox-close {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 2.5rem;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.lightbox-close:hover { color: var(--gold); transform: rotate(90deg); }
-
-/* ===== BACK TO TOP ===== */
-#backToTop {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    background: var(--gold);
-    color: #111;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 99;
-    box-shadow: 0 4px 15px rgba(212,175,55,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
-}
-#backToTop.visible { opacity: 1; transform: translateY(0); }
-#backToTop:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(212,175,55,0.5); }
-
-/* ===== FLOATING WA & IG ===== */
-.wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;text-decoration:none;
-padding:14px 18px;border-radius:999px;font-weight:bold;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition: transform 0.2s;}
-.wa-float:hover{transform: scale(1.05);}
-.ig-float{
-    position:fixed; right:80px; bottom:20px;
-    background: linear-gradient(135deg,#f09433,#bc1888);
-    color:white; width:50px; height:50px;
-    border-radius:50%; display:flex; align-items:center; justify-content:center;
-    text-decoration:none; z-index:99; box-shadow:0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.2s; font-size:1.4rem;
-}
-.ig-float:hover{transform: scale(1.05);}
-
-.music-control {
-  position: fixed; left: 20px; bottom: 20px; background: rgba(23,23,25,0.85);
-  border: 1px solid var(--gold); color: var(--gold); width: 45px; height: 45px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  font-size: 1rem; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; backdrop-filter: blur(5px);
-}
-.music-control.visible { opacity: 1; transform: translateY(0); }
-.music-control.playing { background: var(--gold); color: #111; animation: pulseGlow 2s infinite; }
-@keyframes pulseGlow { 0% { box-shadow:0 0 0 0 rgba(212,175,55,0.4); } 70% { box-shadow:0 0 0 8px rgba(212,175,55,0); } 100% { box-shadow:0 0 0 0 rgba(212,175,55,0); } }
-
-/* ===== PANDUAN PENYAJIAN ===== */
-.guide-section { background:var(--card); border-radius:24px; padding:30px; margin:40px 0; border:1px solid #2a2a2e; }
-.guide-section h2 { color:var(--gold); text-align:center; margin-top:0; font-size:1.8rem; }
-@media (max-width:768px){ .guide-section > div { grid-template-columns:1fr !important; } .bakpao-dual-grid { grid-template-columns:1fr; gap:12px; padding:16px 16px 0 16px; } .bakpao-dual-grid img { height:auto; max-height:420px; } }
-
-/* ===== REVIEW FORM (RAPI 2 KOLOM) ===== */
-.review-section { background:var(--card); border-radius:24px; padding:30px; margin:40px 0; border:1px solid #2a2a2e; }
-.review-section h2 { color:var(--gold); margin-top:0; font-size:1.8rem; text-align:center; }
-
-.review-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-.review-form-grid .full-width { grid-column: 1 / -1; }
-.review-form-grid label { font-size:0.9rem; color:var(--muted); font-weight:600; display:block; margin-bottom:4px; }
-.review-form-grid input, .review-form-grid textarea, .review-form-grid .file-input-custom {
-    width:100%; padding:10px 14px; background:#202023; border:1px solid #3a3a3e; border-radius:10px; color:var(--text); font-size:0.95rem;
-}
-.review-form-grid input:focus, .review-form-grid textarea:focus { outline:none; border-color:var(--gold); }
-
-.review-form-grid .star-rating-input {
-    display:flex; gap:6px; font-size:1.8rem; color:#444; cursor:pointer; margin-top:4px;
-}
-.review-form-grid .star-rating-input span:hover,
-.review-form-grid .star-rating-input span.active { color:var(--gold); }
-
-.review-form-grid .file-input-wrapper label { display:block; margin-bottom:4px; }
-.review-form-grid .file-input-custom { padding:8px; cursor:pointer; }
-
-.btn-submit {
-    width:100%; padding:12px; background:transparent; border:2px solid var(--gold);
-    color:var(--gold); font-weight:bold; border-radius:10px; cursor:pointer; transition:all 0.3s;
-    grid-column: 1 / -1;
-}
-.btn-submit:hover { background:var(--gold); color:#111; }
-
-@media (max-width: 768px) {
-    .review-form-grid { grid-template-columns: 1fr; }
-    .review-form-grid .full-width { grid-column: 1; }
-}
+@keyframes bgMove{0%{transform:translate(0,0)}50%{transform:translate(50px,30px)}100%{transform:translate(0,0)}}
+/* ===== PROGRESS BAR ===== */
+#progressBar{position:fixed;top:0;left:0;height:3px;background:var(--gold);width:0%;z-index:9999;transition:width 0.1s;box-shadow:0 0 20px rgba(212,175,55,0.4)}
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
 </style>
 </head>
 <body>
-
-<!-- PROGRESS BAR -->
 <div id="progressBar"></div>
+<style>
+/* ===== HERO ===== */
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px 30px;position:relative}
+.hero-content{z-index:2;width:100%;max-width:600px;margin:0 auto}
+.brand-logo{width:100%;max-width:300px;height:auto;margin:0 auto 15px;filter:drop-shadow(0 8px 30px rgba(212,175,55,0.2));animation:logoIntro 1s ease-out}
+@keyframes logoIntro{from{opacity:0;transform:scale(0.9) translateY(-20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.hero h1{font-size:2.5rem;letter-spacing:3px;color:var(--gold);margin:0 0 5px;font-weight:800}
+.hero h3{font-size:1rem;color:var(--muted);margin:0 0 8px;font-weight:400;letter-spacing:1px}
+.hero p{font-size:0.9rem;color:#999;margin:0 0 15px;font-style:italic}
+/* ===== SEARCH BAR ===== */
+.search-container{max-width:400px;margin:0 auto 20px;padding:0 10px}
+.search-container input{width:100%;padding:12px 18px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:30px;color:var(--text);font-size:0.95rem;backdrop-filter:blur(8px);transition:all 0.3s}
+.search-container input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 20px rgba(212,175,55,0.1)}
+.search-container input::placeholder{color:#666}
+/* ===== FILTER ===== */
+.filter-container{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:25px}
+.filter-btn{padding:6px 18px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:600;font-size:0.8rem;cursor:pointer;transition:all 0.3s}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);color:#111;border-color:var(--gold)}
+</style>
+<style>
+/* ===== GLASS CARD ===== */
+.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin:20px 0;box-shadow:var(--shadow);transition:all 0.4s cubic-bezier(0.25,1,0.5,1)}
+.card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+.card img{width:100%;height:240px;object-fit:cover;transition:transform 0.6s}
+.card:hover img{transform:scale(1.03)}
+.content{padding:16px}
+.badge{display:inline-block;background:var(--gold);color:#111;padding:4px 12px;border-radius:999px;font-size:0.7rem;font-weight:700;margin-bottom:8px}
+.badge-serving{display:inline-block;padding:3px 12px;border-radius:20px;font-size:0.65rem;font-weight:700;text-transform:uppercase;margin-right:4px}
+.badge-goreng{background:#ff8c00;color:#111}
+.badge-kukus{background:#00bcd4;color:#111}
+.badge-mix{background:#9c27b0;color:#fff}
+.badge-weight{display:inline-block;padding:2px 10px;border-radius:12px;font-size:0.65rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)}
+.storage-info{font-size:0.7rem;color:#777;margin-top:4px;display:flex;align-items:center;gap:5px}
+.price{margin-top:10px;color:var(--gold);font-weight:700;line-height:1.7;font-size:1rem}
+.price small{color:var(--muted);font-weight:400;font-style:italic}
+/* ===== CART ADD BUTTON ON CARD ===== */
+.btn-cart-add{background:var(--gold);color:#111;border:none;padding:6px 14px;border-radius:30px;font-weight:700;font-size:0.75rem;cursor:pointer;transition:0.3s;margin-top:10px;width:100%}
+.btn-cart-add:hover{background:#fff;transform:scale(1.02)}
+</style>
+<style>
+/* ===== SECTION HEADER ===== */
+.menu-section-header{font-size:1.4rem;font-weight:800;color:var(--gold);margin:30px 0 15px;padding-bottom:8px;border-bottom:2px solid rgba(212,175,55,0.15);display:flex;align-items:center;gap:12px}
+.menu-section-header span{font-size:1.6rem}
+/* ===== BAKPAO DUAL GRID ===== */
+.bakpao-dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 16px 0}
+.bakpao-dual-grid img{width:100%;height:200px;border-radius:12px;border:1px solid var(--border);object-fit:cover}
+.bakpao-img-catalog{object-fit:contain;background:#1c1c1e}
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){.hero h1{font-size:2rem}.brand-logo{max-width:220px}.card img{height:180px}.bakpao-dual-grid{grid-template-columns:1fr;padding:12px}.bakpao-dual-grid img{height:auto;max-height:280px}.filter-container{gap:5px}.filter-btn{font-size:0.7rem;padding:4px 14px}}
+</style>
+</head>
+<body>
+<div id="progressBar"></div>
+<style>
+/* ===== FLOATING BUTTONS GROUP (BOTTOM RIGHT) ===== */
+.float-group{position:fixed;bottom:20px;right:15px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;z-index:99}
+.float-group .btn-float{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;color:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.4);transition:all 0.3s;border:none;cursor:pointer}
+.float-group .btn-float:hover{transform:scale(1.08)}
+.btn-wa{background:#25D366}
+.btn-ig{background:linear-gradient(135deg,#f09433,#bc1888)}
+.btn-top{background:var(--gold);color:#111;font-size:1.2rem}
+.btn-music{background:rgba(23,23,25,0.85);backdrop-filter:blur(8px);border:1px solid var(--gold);color:var(--gold);font-size:1rem;width:50px;height:50px}
+.btn-music.playing{background:var(--gold);color:#111;animation:pulseGlow 2s infinite}
+@keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(212,175,55,0.4)}70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+/* ===== PANDA (KIRI BAWAH) ===== */
+#mascot{position:fixed;bottom:20px;left:15px;width:60px;height:60px;z-index:99;cursor:pointer;transition:transform 0.3s;filter:drop-shadow(0 4px 15px rgba(212,175,55,0.3))}
+#mascot img{width:100%;height:100%;object-fit:contain}
+#mascot.bounce{animation:mascotBounce 0.5s}
+@keyframes mascotBounce{0%{transform:scale(1)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(0.9) rotate(8deg)}100%{transform:scale(1)}}
+#mascot .speech{position:absolute;bottom:70px;left:0;background:rgba(23,23,25,0.9);backdrop-filter:blur(8px);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.7rem;font-weight:700;border:1px solid var(--gold);white-space:nowrap;opacity:0;transition:0.4s}
+#mascot .speech.show{opacity:1}
+/* ===== BACK TO TOP (DI ATAS WA) ===== */
+#backToTop{opacity:0;transform:translateY(20px);transition:all 0.4s;pointer-events:none}
+#backToTop.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+@media(max-width:480px){.float-group .btn-float{width:44px;height:44px;font-size:1.1rem}#mascot{width:50px;height:50px;bottom:10px;left:10px}}
+</style>
+<style>
+/* ===== REVIEW ===== */
+.review-section{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:24px;margin:30px 0}
+.review-section h2{color:var(--gold);text-align:center;font-size:1.4rem;margin:0 0 15px}
+.carousel-wrapper{overflow:hidden;position:relative;border-radius:12px}
+.review-track{display:flex;transition:transform 0.5s ease;touch-action:pan-y}
+.review-item{min-width:100%;padding:16px;background:rgba(255,255,255,0.02);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;box-sizing:border-box}
+.review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.reviewer-name{font-weight:700;font-size:0.9rem}
+.review-stars{color:var(--gold);letter-spacing:2px}
+.review-text{color:var(--muted);font-size:0.9rem;font-style:italic;margin:0 0 8px}
+.review-attached-img{max-width:120px;height:120px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:0.3s}
+.review-attached-img:hover{transform:scale(1.05)}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin:15px 0 0}
+.carousel-dots span{width:10px;height:10px;border-radius:50%;background:#444;cursor:pointer;transition:0.3s}
+.carousel-dots span.active{background:var(--gold);width:28px;border-radius:10px}
+/* ===== LIGHTBOX ===== */
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999;justify-content:center;align-items:center;padding:20px}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90%;max-height:90%;border-radius:12px;border:2px solid var(--gold)}
+.lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer}
+/* ===== BOTTOM CART SHEET ===== */
+.cart-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9998}
+.cart-overlay.active{display:block}
+.cart-sheet{position:fixed;bottom:0;left:0;width:100%;max-height:70vh;background:#1a1a1c;border-radius:24px 24px 0 0;padding:20px;z-index:9999;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 -10px 40px rgba(0,0,0,0.6)}
+.cart-sheet.open{transform:translateY(0)}
+.cart-sheet .handle{width:40px;height:4px;background:#555;border-radius:10px;margin:0 auto 15px}
+.cart-sheet h2{color:var(--gold);font-size:1.2rem;margin:0 0 10px}
+.cart-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem}
+.cart-total{font-weight:700;font-size:1.1rem;color:var(--gold);padding:12px 0;border-top:2px solid var(--gold);margin-top:10px}
+.btn-wa-cart{background:#25D366;color:#111;border:none;padding:12px;border-radius:30px;font-weight:700;font-size:1rem;width:100%;cursor:pointer;margin-top:10px}
+.btn-clear-cart{background:transparent;border:1px solid #555;color:#999;padding:8px;border-radius:30px;font-size:0.8rem;cursor:pointer;width:100%;margin-top:6px}
+</style>
+<!-- ===== MUSIC AUDIO ===== -->
+<audio id="bgMusic" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 
-<!-- PANDA STATIS DENGAN GIF (DIAM DI POJOK KANAN BAWAH) -->
-<div id="mascot" class="mascot">
-    <img id="pandaImg" src="panda_normal.gif" alt="Panda Maskot Mantul Kitchen">
-    <span class="speech-bubble" id="speechBubble">Halo! 🥟</span>
-</div>
-
-<audio id="pandaAudio" preload="auto">
-    <source src="data:audio/wav;base64,U3RlcmVvIGlzIGR1bWIgaW4gYmFzZTY0IGZvciB0aGUgc2FrZSBvZiBzaW1wbGljaXR5LCBidXQgd2Ugd2lsbCB1c2UgV2ViIEF1ZGlvIEFQSSB0byBnZW5lcmF0ZSB0aGUgc291bmQgaW4gSlMu" type="audio/wav">
-</audio>
-
-<audio id="bgMusic" loop>
-  <source src="musik.mp3" type="audio/mpeg">
-</audio>
-<div id="musicBtn" class="music-control" onclick="toggleMusic()">🎵</div>
-
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section class="hero">
 <div class="hero-content">
-<img src="./logo.png" alt="Logo Mantul Kitchen" class="brand-logo">
+<img src="logo.png" alt="Mantul Kitchen" class="brand-logo">
 <h1>MANTUL KITCHEN</h1>
 <h3>Premium Frozen Food</h3>
 <p>"Kualitas Restoran Bintang Lima, Kini Hadir di Meja Makan Rumah Anda"</p>
-<button onclick="lihatMenuDanPutarMusik()" class="btn">Lihat Menu 🍲</button>
-<br>
-<a href="https://www.instagram.com/mantul.kitchenfood?igsh=MW9kc2d2bG1zczl2OA==" target="_blank" class="social-link-hero">
-    📷 Follow @mantul.kitchenfood
-</a>
 </div>
 </section>
 
-<div class="container">
-<h2 id="menu" class="section-title reveal reveal-scale">DAFTAR MENU PREMIUM</h2>
-
-<!-- FILTER -->
+<!-- ===== SEARCH & FILTER ===== -->
+<div class="container" style="max-width:1100px;margin:0 auto;padding:0 16px">
+<div class="search-container"><input type="text" id="searchInput" placeholder="🔍 Cari menu favorit..." oninput="filterMenu()"></div>
 <div class="filter-container">
-    <button class="filter-btn active" data-filter="all" onclick="filterMenu('all')">🍽️ Semua</button>
-    <button class="filter-btn" data-filter="goreng" onclick="filterMenu('goreng')">🍤 Goreng</button>
-    <button class="filter-btn" data-filter="kukus" onclick="filterMenu('kukus')">🥟 Kukus</button>
-    <button class="filter-btn" data-filter="mix" onclick="filterMenu('mix')">🍽️ Mix</button>
+<button class="filter-btn active" data-filter="all" onclick="setFilter('all')">🍽️ Semua</button>
+<button class="filter-btn" data-filter="goreng" onclick="setFilter('goreng')">🍤 Goreng</button>
+<button class="filter-btn" data-filter="kukus" onclick="setFilter('kukus')">🥟 Kukus</button>
+<button class="filter-btn" data-filter="mix" onclick="setFilter('mix')">🍽️ Mix</button>
+</div>
+<div id="menuContainer">
+
+<!-- ===== FLOATING BUTTONS (RAPI) ===== -->
+<div class="float-group">
+<button class="btn-float btn-music" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<button class="btn-float btn-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+<a class="btn-float btn-wa" href="https://wa.me/62881025532438" target="_blank">📞</a>
+<a class="btn-float btn-ig" href="https://www.instagram.com/mantul.kitchenfood" target="_blank">📷</a>
 </div>
 
-<!-- ===== KATALOG PRODUK (LENGKAP, TIDAK BERUBAH) ===== -->
-<!-- BEST SELLER -->
+<!-- ===== PANDA ===== -->
+<div id="mascot"><img id="pandaImg" src="panda_normal.gif" alt="Panda"><span class="speech" id="speechBubble">Halo! 🥟</span></div>
+
+<!-- ===== CART TOGGLE BUTTON (FLOATING KIRI ATAS/PANEL) ===== -->
+<div style="position:fixed;top:70px;right:15px;z-index:99">
+<button onclick="toggleCart()" style="background:var(--gold);color:#111;border:none;padding:10px 14px;border-radius:30px;font-weight:700;font-size:0.8rem;box-shadow:0 4px 15px rgba(0,0,0,0.4);display:flex;align-items:center;gap:6px;cursor:pointer">
+🛒 <span id="cartCountBadge" style="background:#111;color:#fff;border-radius:50%;padding:2px 8px;font-size:0.7rem">0</span>
+</button>
+</div>
+<!-- ===== BEST SELLER ===== -->
 <div class="menu-section-header"><span>🔥</span> BEST SELLER</div>
 
 <!-- DIMSUM PREMIUM (25gr) -->
-<div class="card reveal reveal-left reveal-stagger" style="--order:0" data-category="mix">
+<div class="card" data-category="mix" data-name="Dimsum Premium">
 <img src="01_Dimsum_Premium.png" alt="Dimsum 25gr">
 <div class="content">
 <span class="badge">🔥 BEST SELLER</span>
 <span class="badge-serving badge-mix">🍽️ Mix</span>
 <span class="badge-weight">⚖️ 25gr / Pcs</span>
-<h2>DIMSUM PREMIUM (25gr)</h2>
-<p>Dibuat dari olahan daging ayam segar bertekstur <i>juicy</i> dengan bumbu umami autentik. Ukuran pas untuk cemilan santai Anda.</p>
-<p style="margin-top: 5px; font-size: 0.9em;">✨ <b>Varian Topping:</b> Mozarella, Ayam Jamur, Smoke Beef, Sosis, Crabstick.</p>
+<h2 style="font-size:1.2rem;margin:6px 0">DIMSUM PREMIUM (25gr)</h2>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Daging ayam juicy dengan bumbu umami autentik.</p>
+<p style="font-size:0.8rem;color:#888;margin:2px 0">✨ Varian: Mozarella, Ayam Jamur, Smoke Beef, Sosis, Crabstick.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
 <div class="price">
-  5 pcs Rp17.500<br>
-  10 pcs Rp35.000<br>
-  <small style="color:var(--muted); font-weight:normal; font-style:italic;">*Free Saos Spesial</small>
+  <span style="display:flex;flex-wrap:wrap;gap:10px;font-size:0.9rem">
+    <span>5 pcs <b>Rp17.500</b></span>
+    <span>10 pcs <b>Rp35.000</b></span>
+  </span>
+  <small>*Free Saos Spesial</small>
 </div>
+<button class="btn-cart-add" onclick="addToCart('Dimsum Premium','Pack isi 5 (Rp17.500)',17500,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add" style="margin-top:4px;background:#2a2a2e;color:#fff" onclick="addToCart('Dimsum Premium','Pack isi 10 (Rp35.000)',35000,10)">+ Tambah (isi 10)</button>
 </div></div>
 
 <!-- STEAM CEKER LADA HITAM -->
-<div class="card reveal reveal-right reveal-stagger" style="--order:1" data-category="kukus">
+<div class="card" data-category="kukus" data-name="Steam Ceker">
 <img src="05_Ceker_Saus_Lada_Premium.png" alt="Ceker">
 <div class="content">
 <span class="badge">🌟 FAVORIT PELANGGAN</span>
 <span class="badge-serving badge-kukus">🥟 Kukus</span>
-<h2>STEAM CEKER LADA HITAM PREMIUM</h2>
-<p>Dimasak dengan metode <i>slow-steam</i> hingga tulang rawan menjadi super empuk. Berpadu sempurna dengan saus lada hitam pekat yang meresap kuat, pedas hangat, dan nagih!</p>
+<h2>STEAM CEKER LADA HITAM</h2>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Slow-steam hingga empuk, saus lada hitam pekat meresap sempurna.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">1 pack Rp15.000</div>
+<div class="price">1 pack <b>Rp15.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Steam Ceker','Pack',15000,1)">+ Tambah</button>
 </div></div>
-
-<!-- DIMSUM -->
-<div class="menu-section-header"><span>🥟</span> DIMSUM</div>
+<!-- ===== DIMSUM COLLECTION ===== -->
+<div class="menu-section-header"><span>🥟</span> DIMSUM COLLECTION</div>
 
 <!-- DIMSUM JUMBO (35gr) -->
-<div class="card reveal reveal-left reveal-stagger" style="--order:2" data-category="mix">
+<div class="card" data-category="mix" data-name="Dimsum Jumbo">
 <img src="01_Dimsum_Premium.png" alt="Dimsum 35gr">
 <div class="content">
 <span class="badge">👑 PREMIUM JUMBO</span>
 <span class="badge-serving badge-mix">🍽️ Mix</span>
 <span class="badge-weight">⚖️ 35gr / Pcs</span>
 <h2>DIMSUM JUMBO (35gr)</h2>
-<p>Puasnya maksimal! Varian <i>signature</i> berukuran ekstra besar dengan isian daging ayam padat yang melimpah. Cocok untuk Anda yang ingin porsi lebih mengenyangkan.</p>
-<p style="margin-top: 5px; font-size: 0.9em;">✨ <b>Topping Istimewa:</b> Telor Puyuh ⭐, Mozarella ⭐, Udang ⭐, Sosis, Nori, Jamur, Smoke Beef, Crabstick.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Ekstra besar, isian daging ayam padat melimpah.</p>
+<p style="font-size:0.8rem;color:#888;margin:2px 0">✨ Topping: Telor Puyuh, Mozarella, Udang, Sosis, Nori, Jamur.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">16 pcs Rp60.000<br><small style="color:var(--muted);font-weight:normal;font-style:italic;">*Free Saos & Chili Oil</small></div>
+<div class="price">16 pcs <b>Rp60.000</b><br><small>*Free Saos & Chili Oil</small></div>
+<button class="btn-cart-add" onclick="addToCart('Dimsum Jumbo','Pack isi 16 (Rp60.000)',60000,16)">+ Tambah</button>
 </div></div>
 
 <!-- DIMSUM GORENG JUMBO LUMER -->
-<div class="card reveal reveal-right reveal-stagger" style="--order:3" data-category="goreng">
+<div class="card" data-category="goreng" data-name="Dimsum Goreng">
 <img src="dimsum_goreng.png" alt="Dimsum Goreng">
 <div class="content">
 <span class="badge">🤤 NEW & LUMER</span>
 <span class="badge-serving badge-goreng">🍤 Goreng</span>
 <h2>DIMSUM GORENG JUMBO LUMER</h2>
-<p>Sensasi <i>crunchy</i> (renyah) di luar dan super <i>juicy</i> di dalam! Digoreng keemasan dengan kejutan isian gurih yang meleleh lumer sempurna di setiap gigitan.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Crunchy di luar, juicy di dalam! Isian gurih meleleh.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">1 pack (isi 3) Rp25.000</div>
+<div class="price">1 pack (isi 3) <b>Rp25.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Dimsum Goreng','Pack isi 3',25000,3)">+ Tambah</button>
 </div></div>
 
 <!-- GYOZA PREMIUM -->
-<div class="card reveal reveal-left reveal-stagger" style="--order:4" data-category="mix">
+<div class="card" data-category="mix" data-name="Gyoza Premium">
 <img src="02_Gyoza_Premium.png" alt="Gyoza">
 <div class="content">
 <span class="badge">🥟 JAPANESE STYLE</span>
 <span class="badge-serving badge-mix">🍽️ Mix</span>
 <h2>GYOZA PREMIUM</h2>
-<p>Terinspirasi resep autentik Jepang. Balutan kulit tipis yang dipanggang harum, berisi paduan daging ayam cincang premium, kucai segar, dan sentuhan jahe ringan yang menghangatkan.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Kulit tipis, isian ayam cincang premium & kucai segar.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">5 pcs Rp17.500<br>10 pcs Rp35.000</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:10px;font-size:0.9rem">
+    <span>5 pcs <b>Rp17.500</b></span>
+    <span>10 pcs <b>Rp33.000</b></span>
+  </span>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Gyoza Premium','Pack isi 5 (Rp17.500)',17500,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add" style="margin-top:4px;background:#2a2a2e;color:#fff" onclick="addToCart('Gyoza Premium','Pack isi 10 (Rp33.000)',33000,10)">+ Tambah (isi 10)</button>
 </div></div>
-
-<!-- LUMPIA & SNACK -->
+<!-- ===== LUMPIA & SNACK ===== -->
 <div class="menu-section-header"><span>🌯</span> LUMPIA & SNACK</div>
 
 <!-- WONTON UDANG PREMIUM -->
-<div class="card reveal reveal-right reveal-stagger" style="--order:5" data-category="goreng">
+<div class="card" data-category="goreng" data-name="Wonton Udang">
 <img src="03_Wonton_Udang_Premium.png" alt="Wonton">
 <div class="content">
 <span class="badge">🍤 HIGHLY RECOMMENDED</span>
 <span class="badge-serving badge-goreng">🍤 Goreng</span>
 <h2>WONTON UDANG PREMIUM</h2>
-<p>Kombinasi mewah antara daging ayam gurih dan <b>udang utuh pilihan</b> yang renyah manis, dibalut dalam kulit wonton sutra yang super lembut.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Udang utuh pilihan dalam kulit wonton sutra.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
+<div class="price">
+  <span style="display:flex;flex-wrap:wrap;gap:10px;font-size:0.9rem">
+    <span>5 pcs <b>Rp25.000</b></span>
+    <span>10 pcs <b>Rp50.000</b></span>
+  </span>
+</div>
+<button class="btn-cart-add" onclick="addToCart('Wonton Udang','Pack isi 5 (Rp25.000)',25000,5)">+ Tambah (isi 5)</button>
+<button class="btn-cart-add" style="margin-top:4px;background:#2a2a2e;color:#fff" onclick="addToCart('Wonton Udang','Pack isi 10 (Rp50.000)',50000,10)">+ Tambah (isi 10)</button>
 </div></div>
 
 <!-- LUMPIA KULIT TAHU UDANG -->
-<div class="card reveal reveal-left reveal-stagger" style="--order:6" data-category="goreng">
-<img src="04_Lumpia_Udang.png" alt="Lumpia Kulit Tahu Udang">
+<div class="card" data-category="goreng" data-name="Lumpia Udang">
+<img src="04_Lumpia_Udang.png" alt="Lumpia Udang">
 <div class="content">
 <span class="badge">🥢 PREMIUM LINE</span>
 <span class="badge-serving badge-goreng">🍤 Goreng</span>
 <h2>LUMPIA KULIT TAHU UDANG</h2>
-<p>Perpaduan sempurna udang segar dan bumbu pilihan yang dibalut lembaran kulit tahu. Menghasilkan tekstur luar yang renyah wangi setelah digoreng, dengan isian padat gurih.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Udang segar dibalut kulit tahu, renyah wangi.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
+<div class="price">5 pcs <b>Rp25.000</b> | 10 pcs <b>Rp50.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Lumpia Udang','Pack isi 5',25000,5)">+ Tambah</button>
 </div></div>
 
 <!-- LUMPIA AYAM JAMUR -->
-<div class="card reveal reveal-right reveal-stagger" style="--order:7" data-category="goreng">
-<img src="04_Lumpia_Ayam.png" alt="Lumpia Ayam Jamur">
+<div class="card" data-category="goreng" data-name="Lumpia Ayam">
+<img src="04_Lumpia_Ayam.png" alt="Lumpia Ayam">
 <div class="content">
 <span class="badge">🥢 PREMIUM LINE</span>
 <span class="badge-serving badge-goreng">🍤 Goreng</span>
 <h2>LUMPIA AYAM JAMUR</h2>
-<p>Isian olahan ayam segar dan potongan jamur spesial yang diolah dengan minyak wijen wangi, diselimuti renyahnya kulit lumpia premium.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Ayam segar & jamur spesial dengan minyak wijen wangi.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">5 pcs Rp25.000<br>10 pcs Rp50.000</div>
+<div class="price">5 pcs <b>Rp25.000</b> | 10 pcs <b>Rp50.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Lumpia Ayam','Pack isi 5',25000,5)">+ Tambah</button>
 </div></div>
 
 <!-- BAKPAO KARAKTER -->
-<div class="card reveal reveal-scale reveal-stagger" style="--order:8" data-category="kukus">
+<div class="card" data-category="kukus" data-name="Bakpao">
 <div class="bakpao-dual-grid">
-  <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter Baby Animal" class="bakpao-img-zoom">
-  <img src="06_Bakpao_Katalog_List.png" alt="Katalog List Ragam Karakter Bakpao" class="bakpao-img-catalog">
+  <img src="06_Bakpao_Karakter_Baby_Animal.png" alt="Bakpao Karakter">
+  <img src="06_Bakpao_Katalog_List.png" alt="Katalog Bakpao" class="bakpao-img-catalog">
 </div>
 <div class="content">
-<span class="badge">🧸 KIDS & FAMILY FAVORITE</span>
+<span class="badge">🧸 KIDS & FAMILY</span>
 <span class="badge-serving badge-kukus">🥟 Kukus</span>
 <h2>BAKPAO KARAKTER PREMIUM</h2>
-<p>Roti bakpao bertekstur selembut awan dengan bentuk karakter yang sangat menggemaskan. 100% Halal, sehat tanpa pengawet, dengan isian rasa manis yang dijamin jadi rebutan anak-anak.</p>
+<p style="font-size:0.85rem;color:var(--muted);margin:4px 0">Lembut seperti awan, bentuk karakter menggemaskan.</p>
 <div class="storage-info">❄️ Simpan di Freezer -18°C</div>
-<div class="price">1 pack (isi 6) Rp25.000</div>
+<div class="price">1 pack (isi 6) <b>Rp25.000</b></div>
+<button class="btn-cart-add" onclick="addToCart('Bakpao','Pack isi 6',25000,6)">+ Tambah</button>
 </div></div>
-
+</div>
 <!-- ===== PANDUAN PENYAJIAN ===== -->
-<div class="guide-section reveal reveal-scale">
-    <h2>🍳 PANDUAN PENYAJIAN</h2>
-    <p style="text-align:center;color:var(--muted);margin-bottom:30px;">Cara terbaik menikmati produk Mantul Kitchen agar rasa maksimal</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-        <div style="background:var(--card);border-radius:24px;padding:24px;border:1px solid #2a2a2e;">
-            <h3 style="color:#00bcd4;margin-top:0;font-size:1.3rem;">🥟 Kukus (Steam)</h3>
-            <p style="color:var(--muted);font-size:0.9rem;margin:6px 0 12px 0;"><b>Cocok untuk:</b> Dimsum, Gyoza, Wonton Udang, Bakpao, &amp; Steam Ceker.</p>
-            <div style="color:var(--text);font-size:0.9rem;line-height:1.7;">
-                <p><b>Persiapan:</b> Panaskan kukusan hingga air mendidih. Olesi wadah dengan sedikit minyak atau beri alas agar tidak lengket.</p>
-                <p><b>Cara &amp; Waktu:</b> Masukkan bahan, lalu kecilkan api. Kukus selama <b>6–10 menit</b> menggunakan api kecil hingga matang.</p>
-                <p style="color:#ff9800;font-size:0.85rem;"><i>⚠️ Catatan:</i> Jangan kukus terlalu lama agar kulit tidak lembek dan aromanya tidak hilang.</p>
-                <p><b>Saran Penyajian:</b> Sajikan hangat bersama saus sambal atau chili oil.</p>
-            </div>
-        </div>
-        <div style="background:var(--card);border-radius:24px;padding:24px;border:1px solid #2a2a2e;">
-            <h3 style="color:#ff8c00;margin-top:0;font-size:1.3rem;">🍤 Goreng (Fried)</h3>
-            <p style="color:var(--muted);font-size:0.9rem;margin:6px 0 12px 0;"><b>Cocok untuk:</b> Dimsum Goreng Lumer, Lumpia Ayam Jamur, Lumpia Kulit Tahu, &amp; Wonton Udang.</p>
-            <div style="color:var(--text);font-size:0.9rem;line-height:1.7;">
-                <p><b>Persiapan:</b> Panaskan minyak dalam jumlah cukup (hingga bahan agak terendam).</p>
-                <p><b>Tips Khusus:</b> Untuk Wonton Udang, balur dengan telur kocok terlebih dahulu agar lebih krispi.</p>
-                <p><b>Cara &amp; Waktu:</b> Masukkan bahan saat minyak panas, lalu segera kecilkan api. Goreng dengan api kecil sambil sesekali dibalik hingga berwarna <b>cokelat keemasan (golden brown)</b> secara merata.</p>
-                <p><b>Saran Penyajian:</b> Angkat, tiriskan, dan sajikan selagi krispi bersama saus sambal atau chili oil.</p>
-            </div>
-        </div>
-    </div>
-    <div style="margin-top:24px;background:rgba(255,255,255,0.03);border-radius:16px;padding:20px;border:1px solid var(--gold);text-align:center;">
-        <h4 style="color:var(--gold);margin:0 0 8px 0;">❄️ Panduan Durasi Simpan</h4>
-        <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;font-size:0.9rem;color:var(--muted);">
-            <span>🧊 <b>Freezer</b> — 3 bulan</span>
-            <span>🌡️ <b>Suhu Ruang</b> — 12 jam</span>
-            <span>🧊 <b>Chiller / Kulkas</b> — 2 hari</span>
-        </div>
-        <p style="font-size:0.75rem;color:#888;margin-top:10px;">⚠️ Disarankan menyimpan produk dalam kondisi beku (freezer) untuk menjaga kualitas terbaik.</p>
-    </div>
+<div style="background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:24px;margin:30px 0">
+<h2 style="color:var(--gold);text-align:center;font-size:1.4rem;margin:0 0 15px">🍳 PANDUAN PENYAJIAN</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:rgba(0,0,0,0.2);border-radius:16px;padding:16px;border:1px solid var(--border)">
+<h3 style="color:#00bcd4;font-size:1.1rem;margin:0 0 8px">🥟 Kukus</h3>
+<p style="font-size:0.85rem;color:var(--muted)"><b>Cocok:</b> Dimsum, Gyoza, Wonton, Bakpao, Ceker.</p>
+<p style="font-size:0.85rem;color:#aaa">Kukus 6-10 menit api kecil. Sajikan hangat.</p>
+</div>
+<div style="background:rgba(0,0,0,0.2);border-radius:16px;padding:16px;border:1px solid var(--border)">
+<h3 style="color:#ff8c00;font-size:1.1rem;margin:0 0 8px">🍤 Goreng</h3>
+<p style="font-size:0.85rem;color:var(--muted)"><b>Cocok:</b> Dimsum Goreng, Lumpia, Wonton.</p>
+<p style="font-size:0.85rem;color:#aaa">Goreng dengan api kecil hingga golden brown.</p>
+</div>
+</div>
+<div style="margin-top:16px;background:rgba(255,255,255,0.03);border-radius:12px;padding:16px;border:1px solid var(--gold);text-align:center">
+<h4 style="color:var(--gold);margin:0 0 6px">❄️ Durasi Simpan</h4>
+<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:0.85rem;color:var(--muted)">
+<span>🧊 Freezer 3 bulan</span><span>🌡️ Suhu Ruang 12 jam</span><span>🧊 Chiller 2 hari</span>
+</div>
+</div>
 </div>
 
-<!-- ===== REVIEW SECTION (FORM RAPI 2 KOLOM) ===== -->
-<div class="review-section reveal reveal-scale">
-  <h2>💬 TESTIMONI & FEEDBACK</h2>
-  <div class="review-carousel-wrapper">
-    <div class="review-track" id="reviewTrack"></div>
-  </div>
-  <div class="carousel-dots" id="carouselDots"></div>
-
-  <div class="review-form-grid">
-    <!-- Nama -->
-    <div>
-      <label>Nama Anda</label>
-      <input type="text" id="reviewerName" placeholder="Contoh: Siska Amelia" required>
-    </div>
-    <!-- Kontak -->
-    <div>
-      <label>Email / No. WA (Opsional)</label>
-      <input type="text" id="reviewerContact" placeholder="Hanya untuk internal">
-      <small style="color:#d84a38;font-size:0.7rem;">🔒 Data tidak akan muncul publik</small>
-    </div>
-    <!-- Rating Bintang -->
-    <div>
-      <label>Rating Bintang</label>
-      <div class="star-rating-input" id="starRatingInput">
-        <span data-value="1" onclick="setRating(1)">★</span>
-        <span data-value="2" onclick="setRating(2)">★</span>
-        <span data-value="3" onclick="setRating(3)">★</span>
-        <span data-value="4" onclick="setRating(4)">★</span>
-        <span data-value="5" class="active" onclick="setRating(5)">★</span>
-      </div>
-    </div>
-    <!-- Upload Foto -->
-    <div>
-      <label>Tambahkan Foto (Opsional)</label>
-      <div class="file-input-wrapper">
-        <input type="file" id="reviewImage" accept="image/*" class="file-input-custom">
-      </div>
-    </div>
-    <!-- Ulasan (full width) -->
-    <div class="full-width">
-      <label>Ulasan Anda</label>
-      <textarea id="reviewContent" rows="3" placeholder="Bagikan pengalaman kelezatan menu Mantul Kitchen..." required></textarea>
-    </div>
-    <!-- Submit (full width) -->
-    <button class="btn-submit" onclick="submitReview()">Kirim Ulasan Terbaik 🌟</button>
-  </div>
+<!-- ===== REVIEW SECTION ===== -->
+<div class="review-section">
+<h2>💬 TESTIMONI</h2>
+<div class="carousel-wrapper" id="carouselWrapper">
+<div class="review-track" id="reviewTrack"></div>
+</div>
+<div class="carousel-dots" id="carouselDots"></div>
+<div style="margin-top:20px;border-top:1px dashed var(--border);padding-top:20px">
+<h4 style="margin:0 0 15px;font-size:1rem">Tulis Ulasan:</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<input type="text" id="reviewerName" placeholder="Nama Anda" style="background:var(--input);border:1px solid var(--border);border-radius:10px;padding:10px;color:var(--text);grid-column:1">
+<input type="text" id="reviewerContact" placeholder="WA/Email (Opsional)" style="background:var(--input);border:1px solid var(--border);border-radius:10px;padding:10px;color:var(--text);grid-column:2">
+<div style="grid-column:1/-1;display:flex;gap:8px;font-size:1.4rem;color:#555;cursor:pointer" id="starRatingInput">
+<span data-value="1" onclick="setRating(1)">★</span><span data-value="2" onclick="setRating(2)">★</span>
+<span data-value="3" onclick="setRating(3)">★</span><span data-value="4" onclick="setRating(4)">★</span>
+<span data-value="5" class="active" onclick="setRating(5)">★</span>
+</div>
+<input type="file" id="reviewImage" accept="image/*" style="background:var(--input);border:1px dashed var(--gold);border-radius:10px;padding:8px;color:var(--muted);grid-column:1/-1">
+<textarea id="reviewContent" rows="2" placeholder="Bagikan pengalaman Anda..." style="background:var(--input);border:1px solid var(--border);border-radius:10px;padding:10px;color:var(--text);grid-column:1/-1"></textarea>
+<button onclick="submitReview()" style="grid-column:1/-1;background:transparent;border:2px solid var(--gold);color:var(--gold);padding:12px;border-radius:30px;font-weight:700;cursor:pointer">Kirim Ulasan 🌟</button>
+</div>
+</div>
+</div>
+<!-- ===== CART OVERLAY & SHEET ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sheet" id="cartSheet">
+<div class="handle"></div>
+<h2>🛒 Keranjang</h2>
+<div id="cartItemsList"></div>
+<div class="cart-total" id="cartTotalDisplay">Total: Rp 0</div>
+<button class="btn-wa-cart" onclick="checkoutWA()">📱 Pesan via WhatsApp</button>
+<button class="btn-clear-cart" onclick="clearCart()">Kosongkan Keranjang</button>
 </div>
 
-<!-- KEUNGGULAN -->
-<div class="features reveal reveal-scale">
-<h2>Keunggulan & Kualitas Kami:</h2>
-<ul>
-<li>Dominan Daging</li>
-<li>Minim Tepung</li>
-<li>Tanpa Pengawet</li>
-<li>Saus Premium Gratis</li>
-<li>Praktis Siap Kukus atau Goreng</li>
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<span class="lightbox-close">&times;</span>
+<img id="lightboxImg" src="" alt="Preview">
+</div>
+
+<!-- ===== FEATURES, RESELLER, FOOTER ===== -->
+<div style="background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:24px;margin:30px 0">
+<h2 style="color:var(--gold);margin:0 0 10px">Keunggulan Kami:</h2>
+<ul style="list-style:none;padding:0;color:var(--muted);line-height:2;font-size:0.95rem">
+<li>✅ Dominan Daging</li><li>✅ Minim Tepung</li><li>✅ Tanpa Pengawet</li>
+<li>✅ Saus Premium Gratis</li><li>✅ Praktis Siap Kukus/Goreng</li>
 </ul>
 </div>
-
-<!-- RESELLER -->
-<div class="reseller reveal reveal-scale">
-<h2>🤝 Program Reseller</h2>
-<p>Dapatkan harga khusus reseller dan peluang keuntungan menarik.</p>
-<p><strong>WhatsApp: +62 881-0255-32438</strong></p>
+<div style="background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:24px;margin:30px 0;text-align:center">
+<h2 style="color:var(--gold);margin:0 0 10px">🤝 Program Reseller</h2>
+<p style="color:var(--muted)">Harga khusus & peluang keuntungan.</p>
+<p style="font-weight:700">WA: +62 881-0255-32438</p>
 </div>
-
-<!-- FOOTER -->
-<div class="footer reveal reveal-scale">
-<h2>🛒 MANTUL KITCHEN PREMIUM</h2>
-<p>Kelezatan Kuliner Resto-Grade Premium Untuk Keluarga Anda Di Rumah.</p>
-<p>WhatsApp: +62 881-0255-32438</p>
-<p style="margin-top:10px;">
-    <a href="https://www.instagram.com/mantul.kitchenfood?igsh=MW9kc2d2bG1zczl2OA==" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:bold;">
-        📷 Instagram: @mantul.kitchenfood
-    </a>
-</p>
+<div style="text-align:center;padding:30px 0;color:#555;font-size:0.8rem;border-top:1px solid var(--border)">
+<h2 style="color:var(--gold);font-size:1.2rem;margin:0 0 10px">🛒 MANTUL KITCHEN</h2>
+<p>Kelezatan Resto-Grade Untuk Keluarga Anda.</p>
+<p>WA: +62 881-0255-32438</p>
+<a href="https://www.instagram.com/mantul.kitchenfood" target="_blank" style="color:var(--gold);text-decoration:none">📷 @mantul.kitchenfood</a>
 </div>
-</div>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">&times;</span>
-    <img id="lightboxImg" src="" alt="Preview">
-</div>
-
-<!-- FLOATING BUTTONS -->
-<a class="ig-float" href="https://www.instagram.com/mantul.kitchenfood?igsh=MW9kc2d2bG1zczl2OA==" target="_blank" title="Instagram">📷</a>
-<a class="wa-float" href="https://wa.me/62881025532438" target="_blank">📞 Pesan via WA</a>
-<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
 <script>
 // ============================================================
 // KONFIGURASI
 // ============================================================
 const CLOUD_URL = "https://script.google.com/macros/s/AKfycbzI6-_z0LtWs6hC9M0oSak_DdYLtTHBAQqZsQV4CIYAbCmMeW_t3y8yLULYiQZuDiav/exec";
-
-// ============================================================
-// PANDA INTERAKTIF (DIAM DI POJOK, KLIK → BERGANTI GIF + SUARA)
-// ============================================================
-const pandaContainer = document.getElementById('mascot');
-const pandaImg = document.getElementById('pandaImg');
-const speechBubble = document.getElementById('speechBubble');
-let speechTimeout = null;
-
-const pandaReactions = [
-    { gif: 'panda_happy.gif', text: 'Mantul abis! 😋', sound: 'happy' },
-    { gif: 'panda_normal.gif', text: 'Halo! 🥟', sound: 'boop' },
-    { gif: 'panda_happy.gif', text: 'Wah, enak! 🤩', sound: 'surprised' }
-];
-let reactionIndex = 0;
-
-function playPandaSound(type) {
-    try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.type = 'sine';
-        let freq = 800, duration = 0.15;
-        if (type === 'happy') { freq = 1200; duration = 0.2; }
-        else if (type === 'surprised') { freq = 1500; duration = 0.1; }
-        osc.frequency.value = freq;
-        gain.gain.value = 0.15;
-        osc.start();
-        osc.stop(ctx.currentTime + duration);
-        setTimeout(() => ctx.close(), 500);
-    } catch(e) { console.log('Audio context blocked'); }
-}
-
-function showSpeech(text) {
-    speechBubble.innerText = text;
-    speechBubble.classList.add('show');
-    if (speechTimeout) clearTimeout(speechTimeout);
-    speechTimeout = setTimeout(() => speechBubble.classList.remove('show'), 2000);
-}
-
-function pandaReact() {
-    const reaction = pandaReactions[reactionIndex % pandaReactions.length];
-    // Ganti GIF
-    pandaImg.src = reaction.gif;
-    // Animasi bounce
-    pandaContainer.classList.remove('bounce');
-    void pandaContainer.offsetWidth; // reflow
-    pandaContainer.classList.add('bounce');
-    // Suara & teks
-    playPandaSound(reaction.sound);
-    showSpeech(reaction.text);
-    reactionIndex++;
-    // Kembali ke GIF normal setelah 2 detik
-    setTimeout(() => {
-        pandaImg.src = 'panda_normal.gif';
-    }, 2000);
-}
-
-// Event klik panda
-pandaContainer.addEventListener('click', pandaReact);
-
-// ============================================================
-// PROGRESS BAR & BACK TO TOP
-// ============================================================
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
-    const btn = document.getElementById('backToTop');
-    if (scrollTop > 300) btn.classList.add('visible');
-    else btn.classList.remove('visible');
-});
-
-// ============================================================
-// FILTER MENU
-// ============================================================
-function filterMenu(category) {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === category);
-    });
-    document.querySelectorAll('.card[data-category]').forEach(card => {
-        card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
-    });
-}
-
-// ============================================================
-// REVIEW CAROUSEL + LIGHTBOX
-// ============================================================
-let currentSlide = 0;
-let reviewInterval = null;
-const defaultReviews = [
-  { name: "Bunda Keysha", stars: 5, text: "Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha.", img: "" },
-  { name: "Hendra Wijaya", stars: 5, text: "Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt.", img: "" },
-  { name: "Riana", stars: 4, text: "Ceker lada hitamnya empuk banget bumbunya nendang abis. Pas buat stock kulkas pas mager.", img: "" }
-];
+let currentFilter = 'all';
 let allReviews = [];
 
-function renderReviews() {
-    const track = document.getElementById('reviewTrack');
-    const dots = document.getElementById('carouselDots');
-    track.innerHTML = '';
-    dots.innerHTML = '';
-    allReviews.forEach((rev, idx) => {
-        let starsStr = "★".repeat(rev.stars) + "☆".repeat(5 - rev.stars);
-        let imgHtml = rev.img ? `<img src="${rev.img}" class="review-attached-img" onclick="event.stopPropagation(); openLightbox('${rev.img}')">` : '';
-        const div = document.createElement('div');
-        div.className = 'review-item';
-        div.innerHTML = `
-            <div class="review-header"><span class="reviewer-name">${rev.name}</span><span class="review-stars">${starsStr}</span></div>
-            <p class="review-text">"${rev.text}"</p>
-            ${imgHtml}
-        `;
-        track.appendChild(div);
-        const dot = document.createElement('span');
-        dot.className = (idx === 0) ? 'active' : '';
-        dot.onclick = () => goToSlide(idx);
-        dots.appendChild(dot);
-    });
-    if (allReviews.length > 0) goToSlide(0);
-}
-
-function goToSlide(index) {
-    const items = document.querySelectorAll('.review-item');
-    const dots = document.querySelectorAll('.carousel-dots span');
-    if (items.length === 0) return;
-    if (index < 0) index = items.length - 1;
-    if (index >= items.length) index = 0;
-    currentSlide = index;
-    document.getElementById('reviewTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
-}
-
-function nextSlide() { goToSlide(currentSlide + 1); }
-
-function loadReviews() {
-    fetch(CLOUD_URL)
-        .then(res => res.json())
-        .then(data => {
-            allReviews = [...defaultReviews, ...(data.reviews || [])];
-            renderReviews();
-            if (reviewInterval) clearInterval(reviewInterval);
-            reviewInterval = setInterval(nextSlide, 5000);
-        })
-        .catch(() => {
-            allReviews = defaultReviews;
-            renderReviews();
-            if (reviewInterval) clearInterval(reviewInterval);
-            reviewInterval = setInterval(nextSlide, 5000);
-        });
-}
-
-function openLightbox(src) {
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightbox').classList.add('active');
-}
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-}
-
 // ============================================================
-// SUBMIT REVIEW
+// SEARCH & FILTER
+// ============================================================
+function filterMenu(){
+  const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const cat = card.dataset.category || '';
+    const matchName = name.includes(keyword);
+    const matchFilter = currentFilter === 'all' || cat === currentFilter;
+    card.style.display = (matchName && matchFilter) ? 'block' : 'none';
+  });
+}
+function setFilter(cat){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
+  filterMenu();
+}
+// ============================================================
+// LOAD REVIEWS
+// ============================================================
+function loadReviews(){
+  const track = document.getElementById('reviewTrack');
+  const dots = document.getElementById('carouselDots');
+  // Default + fetch
+  const defaults = [
+    {name:"Bunda Keysha", stars:5, text:"Dimsumnya padat daging! Anak-anak suka.", img:""},
+    {name:"Hendra", stars:5, text:"Wonton udangnya utuh, worth it!", img:""},
+    {name:"Riana", stars:4, text:"Ceker lada hitamnya empuk, bumbu nendang!", img:""}
+  ];
+  fetch(CLOUD_URL).then(res=>res.json()).then(data=>{
+    allReviews = [...defaults, ...(data.reviews||[])];
+    renderReviews();
+  }).catch(()=>{ allReviews = defaults; renderReviews(); });
+}
+let reviewIndex = 0;
+function renderReviews(){
+  const track = document.getElementById('reviewTrack');
+  const dots = document.getElementById('carouselDots');
+  track.innerHTML = ''; dots.innerHTML = '';
+  allReviews.forEach((r,i)=>{
+    const stars = '★'.repeat(r.stars)+'☆'.repeat(5-r.stars);
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<div class="review-header"><span class="reviewer-name">${r.name}</span><span class="review-stars">${stars}</span></div>
+      <p class="review-text">"${r.text}"</p>
+      ${r.img ? `<img src="${r.img}" class="review-attached-img" onclick="openLightbox('${r.img}')">` : ''}`;
+    track.appendChild(div);
+    const dot = document.createElement('span');
+    dot.className = i===0?'active':'';
+    dot.onclick = ()=>goToReview(i);
+    dots.appendChild(dot);
+  });
+  goToReview(0);
+}
+function goToReview(i){ const items = document.querySelectorAll('.review-item'); if(items.length===0)return; if(i<0)i=items.length-1; if(i>=items.length)i=0; reviewIndex=i; document.getElementById('reviewTrack').style.transform=`translateX(-${i*100}%)`; document.querySelectorAll('.carousel-dots span').forEach((d,idx)=>d.classList.toggle('active',idx===i)); }
+function nextReview(){ goToReview(reviewIndex+1); }
+let reviewInterval = setInterval(nextReview, 5000);
+// Touch Swipe
+let startX=0, isDragging=false;
+const wrapper = document.getElementById('carouselWrapper');
+wrapper.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; isDragging=true; });
+wrapper.addEventListener('touchmove', e=>{ if(!isDragging)return; const diff = startX - e.touches[0].clientX; if(Math.abs(diff)>50){ if(diff>0) nextReview(); else goToReview(reviewIndex-1); isDragging=false; } });
+wrapper.addEventListener('touchend', ()=>{ isDragging=false; });
+// ============================================================
+// CART LOGIC (LocalStorage)
+// ============================================================
+let cart = JSON.parse(localStorage.getItem('mantulCart')) || [];
+function saveCart(){ localStorage.setItem('mantulCart', JSON.stringify(cart)); renderCartBadge(); }
+function renderCartBadge(){ document.getElementById('cartCountBadge').innerText = cart.reduce((s,i)=>s+i.qty, 0); }
+function addToCart(name, varian, price, pcs){
+  const existing = cart.find(item => item.name === name && item.varian === varian);
+  if(existing){ existing.qty += 1; } else { cart.push({ name, varian, price, pcs, qty:1 }); }
+  saveCart();
+  alert(`✅ ${name} (${varian}) ditambahkan!`);
+  renderCartItems();
+}
+function removeFromCart(idx){ cart.splice(idx,1); saveCart(); renderCartItems(); }
+function clearCart(){ if(!confirm('Kosongkan keranjang?'))return; cart=[]; saveCart(); renderCartItems(); if(document.getElementById('cartSheet').classList.contains('open')) toggleCart(); }
+
+function renderCartItems(){
+  const container = document.getElementById('cartItemsList');
+  if(cart.length===0){ container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">Keranjang kosong.</p>'; document.getElementById('cartTotalDisplay').innerText = 'Total: Rp 0'; return; }
+  let html = '';
+  let total = 0;
+  cart.forEach((item, idx)=>{
+    const sub = item.price * item.qty;
+    total += sub;
+    html += `<div class="cart-item"><span><b>${item.name}</b><br><small style="color:#888">${item.varian} x ${item.qty}</small></span><span>${sub.toLocaleString()}<br><button onclick="removeFromCart(${idx})" style="background:transparent;border:none;color:var(--danger);cursor:pointer;font-size:0.7rem">✕</button></span></div>`;
+  });
+  container.innerHTML = html;
+  document.getElementById('cartTotalDisplay').innerText = `Total: Rp ${total.toLocaleString()}`;
+}
+function toggleCart(){
+  const sheet = document.getElementById('cartSheet');
+  const overlay = document.getElementById('cartOverlay');
+  sheet.classList.toggle('open');
+  overlay.classList.toggle('active');
+  if(sheet.classList.contains('open')) renderCartItems();
+}
+// ============================================================
+// CHECKOUT WA
+// ============================================================
+function checkoutWA(){
+  if(cart.length===0)return alert('Keranjang kosong!');
+  let msg = '*MANTUL KITCHEN - Order Baru*\n';
+  msg += '-----------------------------\n';
+  let total = 0;
+  cart.forEach(item => {
+    const sub = item.price * item.qty;
+    total += sub;
+    msg += `${item.name} (${item.varian}) x ${item.qty} = Rp ${sub.toLocaleString()}\n`;
+  });
+  msg += '-----------------------------\n';
+  msg += `*Total: Rp ${total.toLocaleString()}*\n`;
+  msg += '-----------------------------\n';
+  msg += '📱 WA: 0881-0255-32438';
+  const url = `https://wa.me/62881025532438?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+// ============================================================
+// REVIEW FORM
 // ============================================================
 let selectedRating = 5;
-function setRating(val) {
-    selectedRating = val;
-    document.querySelectorAll('#starRatingInput span').forEach(star => {
-        const starVal = parseInt(star.getAttribute('data-value'));
-        star.classList.toggle('active', starVal <= val);
-    });
-}
-
-function processImageAndSubmit(file, callback) {
+function setRating(v){ selectedRating = v; document.querySelectorAll('#starRatingInput span').forEach(s=>{ const val = parseInt(s.dataset.value); s.classList.toggle('active', val<=v); }); }
+function submitReview(){
+  const name = document.getElementById('reviewerName');
+  const text = document.getElementById('reviewContent');
+  const file = document.getElementById('reviewImage');
+  if(!name.value.trim() || !text.value.trim()) return alert('Isi nama & ulasan!');
+  const send = (img='')=>{
+    fetch(CLOUD_URL, {method:'POST', mode:'no-cors', body:JSON.stringify({type:'REVIEW', name:name.value.trim(), stars:selectedRating, text:text.value.trim(), img:img, kontak:document.getElementById('reviewerContact').value.trim()})})
+    .then(()=>{ alert('Terima kasih!'); name.value=''; text.value=''; file.value=''; document.getElementById('reviewerContact').value=''; setRating(5); loadReviews(); });
+  };
+  if(file.files && file.files[0]){
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function (event) {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-            const canvas = document.createElement('canvas');
-            const MAX_WIDTH = 200;
-            let width = img.width, height = img.height;
-            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-            canvas.width = width; canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            callback(canvas.toDataURL('image/jpeg', 0.5));
-        };
+    reader.readAsDataURL(file.files[0]);
+    reader.onload = (e)=>{
+      const img = new Image();
+      img.src = e.target.result;
+      img.onload = ()=>{
+        const canvas = document.createElement('canvas');
+        const MAX=200; let w=img.width, h=img.height;
+        if(w>MAX){ h*=MAX/w; w=MAX; }
+        canvas.width=w; canvas.height=h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img,0,0,w,h);
+        send(canvas.toDataURL('image/jpeg',0.5));
+      };
     };
+  } else send('');
 }
-
-function submitReview() {
-    const nameInput = document.getElementById('reviewerName');
-    const textInput = document.getElementById('reviewContent');
-    const fileInput = document.getElementById('reviewImage');
-    if (!nameInput.value.trim() || !textInput.value.trim()) {
-        alert("Harap isi Nama dan Ulasan Anda terlebih dahulu!");
-        return;
-    }
-    const sendToCloud = (imgBase64 = "") => {
-        fetch(CLOUD_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify({
-                type: 'REVIEW',
-                name: nameInput.value.trim(),
-                stars: selectedRating,
-                text: textInput.value.trim(),
-                img: imgBase64,
-                kontak: document.getElementById('reviewerContact').value.trim()
-            })
-        }).then(() => {
-            alert("Terima kasih! Ulasan Anda telah terkirim ke server.");
-            nameInput.value = ""; textInput.value = ""; fileInput.value = "";
-            document.getElementById('reviewerContact').value = "";
-            setRating(5);
-            loadReviews();
-        }).catch(() => alert("Gagal kirim ulasan. Coba lagi."));
-    };
-    if (fileInput.files && fileInput.files[0]) {
-        processImageAndSubmit(fileInput.files[0], sendToCloud);
-    } else {
-        sendToCloud("");
-    }
-}
-
+function openLightbox(src){ document.getElementById('lightboxImg').src=src; document.getElementById('lightbox').classList.add('active'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('active'); }
 // ============================================================
-// AUDIO MUSIK
+// PANDA INTERAKTIF
+// ============================================================
+const pandaImg = document.getElementById('pandaImg');
+const speech = document.getElementById('speechBubble');
+const pandaContainer = document.getElementById('mascot');
+pandaContainer.addEventListener('click', ()=>{
+  pandaImg.src = 'panda_happy.gif';
+  speech.innerText = 'Mantul! 😋';
+  speech.classList.add('show');
+  pandaContainer.classList.remove('bounce'); void pandaContainer.offsetWidth; pandaContainer.classList.add('bounce');
+  try{ const ctx = new AudioContext(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value=1000; g.gain.value=0.1; o.start(); o.stop(ctx.currentTime+0.15); setTimeout(()=>ctx.close(),500); }catch(e){}
+  setTimeout(()=>{ pandaImg.src = 'panda_normal.gif'; speech.classList.remove('show'); }, 2000);
+});
+// ============================================================
+// MUSIC
 // ============================================================
 const audio = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
-
-function lihatMenuDanPutarMusik() {
-    if (audio.paused) {
-        audio.play().catch(e => console.log("Audio play blocked:", e));
-        musicBtn.innerHTML = "🔊"; musicBtn.classList.add('playing');
-    }
-    musicBtn.classList.add('visible');
-    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
-}
-
-function toggleMusic() {
-    if (audio.paused) { audio.play(); musicBtn.innerHTML = "🔊"; musicBtn.classList.add('playing'); }
-    else { audio.pause(); musicBtn.innerHTML = "🎵"; musicBtn.classList.remove('playing'); }
-}
-
+function toggleMusic(){ if(audio.paused){ audio.play(); musicBtn.classList.add('playing'); musicBtn.innerHTML='🔊'; } else { audio.pause(); musicBtn.classList.remove('playing'); musicBtn.innerHTML='🎵'; } }
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden && !audio.paused){ audio.pause(); musicBtn.classList.remove('playing'); musicBtn.innerHTML='🎵'; }
+});
 // ============================================================
-// INTERSECTION OBSERVER (Stagger)
+// AUTO SYNC ON TAB FOCUS
 // ============================================================
-const revealElements = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
-revealElements.forEach(el => observer.observe(el));
-
+window.addEventListener('focus', () => {
+  console.log('🔄 Tab aktif, refresh data...');
+  loadReviews(); // Bisa ditambah ambil data produk lain jika diperlukan
+});
+// ============================================================
+// BACK TO TOP & PROGRESS BAR
+// ============================================================
+window.addEventListener('scroll', ()=>{
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (scrollTop/docHeight)*100 + '%';
+  const btn = document.getElementById('backToTop');
+  if(scrollTop > 200) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
 // ============================================================
 // INIT
 // ============================================================
-window.onload = function() {
-    loadReviews();
+window.onload = function(){
+  loadReviews();
+  renderCartBadge();
+  renderCartItems();
+  // Auto play music trigger (optional, tapi biar user aktif)
+  // document.addEventListener('click', ()=>{ if(audio.paused) audio.play(); }, { once: true });
 };
 </script>
 </body>
