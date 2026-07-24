@@ -511,10 +511,10 @@ function loadReviews(){
   const track = document.getElementById('reviewTrack');
   const dots = document.getElementById('carouselDots');
   const defaults = [
-    {name:"Bunda Keysha", stars:5, text:"Dimsumnya padat daging! Anak-anak suka.", img:""},
-    {name:"Hendra", stars:5, text:"Wonton udangnya utuh, worth it!", img:""},
-    {name:"Riana", stars:4, text:"Ceker lada hitamnya empuk, bumbu nendang!", img:""}
-  ];
+  {name:"Bunda Keysha", stars:5, text:"Gak bohong, dimsumnya padat daging banget! Anak-anak paling rebutan pas Bakpao karakter babypenguin dikukus, gemes katanya sayang mau dimakan haha.", img:""},
+  {name:"Hendra Wijaya", stars:5, text:"Wonton udangnya dapet jempol dari mertua pas makan malam bareng. Udangnya kerasa utuh gak pelit harganya worth it bgt.", img:""},
+  {name:"Riana", stars:4, text:"Ceker lada hitamnya empuk banget bumbunya nendang abis. Pas buat stock kulkas pas mager.", img:""}
+];
   fetch(CLOUD_URL).then(res=>res.json()).then(data=>{
     allReviews = [...defaults, ...(data.reviews||[])];
     renderReviews();
